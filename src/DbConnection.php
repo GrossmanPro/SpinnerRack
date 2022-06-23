@@ -8,7 +8,7 @@ class DbConnection {
     private $username;
     private $password;
     
-    // Notice that PDO variable is made public. That's because we will need to 
+    // Note that $connection is made public. That's because we will need to 
     // access the full PDO functionality through this variable.
     // https://phpdelusions.net/pdo/common_mistakes
     
