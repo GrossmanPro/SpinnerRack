@@ -44,7 +44,7 @@ class Creator {
         if ($this->id) {
             $sql = 'SELECT * FROM Creators WHERE Id = :id';
             $stmt = $this->connection->prepare($sql);
-            $stmt->execute(array($id));
+            $stmt->execute(array($this->id));
             $creator = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
             $this->firstName = $creator['FirstName'];
             $this->lastName = $creator['LastName'];
