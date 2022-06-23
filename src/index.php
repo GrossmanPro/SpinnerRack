@@ -1,7 +1,7 @@
 <?php
 // this file would more or less be the controller  
 // decides what to do, then passes results through ajax back to view
-
+namespace src;
 require 'DbConnection.php';
 require 'Creator.php';
 
