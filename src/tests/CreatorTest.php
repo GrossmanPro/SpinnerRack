@@ -31,5 +31,27 @@ final class CreatorTest extends TestCase {
         $creator->setFirstName("Eric");
         $this->assertFalse("Elvis" === $creator->getFirstName());
     }
+    
+    public function testSetLastNameSuccess() {
+        // TODO
+        // How do I pass a db connection to this class?
+        $dsn = "sqlsrv:Server=DESKTOP-6PN824R\SQLEXPRESS;Database=SpinnerRack;";
+        $username = "SpinnerRackUser";
+        $password = "password";
+        $pdo = new PDO($dsn, $username, $password);
+        $creator = new \src\Creator($pdo);
+        $creator->setLastName("Grossman");
+        $this->assertEquals("Grossman", $creator->getLastName());
+    }
+
+    public function testSetLastNameFail() {
+        $dsn = "sqlsrv:Server=DESKTOP-6PN824R\SQLEXPRESS;Database=SpinnerRack;";
+        $username = "SpinnerRackUser";
+        $password = "password";
+        $pdo = new PDO($dsn, $username, $password);
+        $creator = new \src\Creator($pdo);
+        $creator->setLastName("Grossman");
+        $this->assertFalse("Presley" === $creator->getLastName());
+    }
 
 }
