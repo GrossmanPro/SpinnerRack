@@ -1,7 +1,6 @@
 <?php
-
+use \PDO;
 use PHPUnit\Framework\TestCase;
-use src;
 
 require '../DbConfig.php';
 require '../DbConnection.php';
@@ -12,16 +11,25 @@ final class CreatorTest extends TestCase {
     // remember to use test prefix, e.g. testSetFirstNameSuccess
 
     public function testSetFirstNameSuccess() {
-        
-        $creator = new \src\Creator($db);
+        // TODO
+        // How do I pass a db connection to this class?
+        $dsn = "sqlsrv:Server=DESKTOP-6PN824R\SQLEXPRESS;Database=SpinnerRack;";
+        $username = "SpinnerRackUser";
+        $password = "password";
+        $pdo = new PDO($dsn, $username, $password);
+        $creator = new \src\Creator($pdo);
         $creator->setFirstName("Eric");
         $this->assertEquals("Eric", $creator->getFirstName());
     }
 
     public function testSetFirstNameFail() {
-        $creator = new \src\Creator($db);
+        $dsn = "sqlsrv:Server=DESKTOP-6PN824R\SQLEXPRESS;Database=SpinnerRack;";
+        $username = "SpinnerRackUser";
+        $password = "password";
+        $pdo = new PDO($dsn, $username, $password);
+        $creator = new \src\Creator($pdo);
         $creator->setFirstName("Eric");
-        $this->assertEquals("Elvis", $creator->getFirstName());
+        $this->assertFalse("Elvis" === $creator->getFirstName());
     }
 
 }
