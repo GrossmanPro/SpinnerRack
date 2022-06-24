@@ -6,7 +6,7 @@ require '../DbConfig.php';
 require '../DbConnection.php';
 require '../Creator.php';
 
-final class CreatorTest extends TestCase {
+class CreatorTest extends TestCase {
     
     // remember to use test prefix, e.g. testSetFirstNameSuccess
 
@@ -20,6 +20,7 @@ final class CreatorTest extends TestCase {
         $creator = new \src\Creator($pdo);
         $creator->setFirstName("Eric");
         $this->assertEquals("Eric", $creator->getFirstName());
+        $pdo = null;
     }
 
     public function testSetFirstNameFail() {
@@ -30,6 +31,7 @@ final class CreatorTest extends TestCase {
         $creator = new \src\Creator($pdo);
         $creator->setFirstName("Eric");
         $this->assertFalse("Elvis" === $creator->getFirstName());
+        $pdo = null;
     }
     
     public function testSetLastNameSuccess() {
@@ -42,6 +44,7 @@ final class CreatorTest extends TestCase {
         $creator = new \src\Creator($pdo);
         $creator->setLastName("Grossman");
         $this->assertEquals("Grossman", $creator->getLastName());
+        $pdo = null;
     }
 
     public function testSetLastNameFail() {
@@ -52,6 +55,7 @@ final class CreatorTest extends TestCase {
         $creator = new \src\Creator($pdo);
         $creator->setLastName("Grossman");
         $this->assertFalse("Presley" === $creator->getLastName());
+        $pdo = null;
     }
 
 }
