@@ -1,14 +1,16 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-require '../DbConfig.php';
-require '../DbConnection.php';
+//require '../DbConfig.php';
+//require '../DbConnection.php';
 require '../Creator.php';
 
 class CreatorTest extends TestCase {
     
     // remember to use test prefix, e.g. testSetFirstNameSuccess
-
+    /**
+     * @covers ::setFirstName
+     */
     public function testSetFirstNameSuccess() {
         // TODO
         // How do I pass a db connection to this class?
@@ -22,6 +24,9 @@ class CreatorTest extends TestCase {
         $pdo = null;
     }
 
+    /**
+     * @covers ::setFirstName
+     */
     public function testSetFirstNameFail() {
         $dsn = "sqlsrv:Server=DESKTOP-6PN824R\SQLEXPRESS;Database=SpinnerRack;";
         $username = "SpinnerRackUser";
@@ -33,6 +38,9 @@ class CreatorTest extends TestCase {
         $pdo = null;
     }
     
+    /**
+     * @covers ::setLastName
+     */
     public function testSetLastNameSuccess() {
         // TODO
         // How do I pass a db connection to this class?
@@ -46,6 +54,9 @@ class CreatorTest extends TestCase {
         $pdo = null;
     }
 
+    /**
+     * @covers ::setLastName
+     */
     public function testSetLastNameFail() {
         $dsn = "sqlsrv:Server=DESKTOP-6PN824R\SQLEXPRESS;Database=SpinnerRack;";
         $username = "SpinnerRackUser";
@@ -57,6 +68,9 @@ class CreatorTest extends TestCase {
         $pdo = null;
     }
     
+    /**
+     * @covers ::__construct
+     */
     public function testLoadCreatorByConstructorSuccess() {
         $dsn = "sqlsrv:Server=DESKTOP-6PN824R\SQLEXPRESS;Database=SpinnerRack;";
         $username = "SpinnerRackUser";
@@ -69,6 +83,9 @@ class CreatorTest extends TestCase {
         $pdo = null;
     }
     
+    /**
+     * @covers ::__construct
+     */
     public function testLoadCreatorByConstructorFail() {
         $dsn = "sqlsrv:Server=DESKTOP-6PN824R\SQLEXPRESS;Database=SpinnerRack;";
         $username = "SpinnerRackUser";
@@ -81,6 +98,9 @@ class CreatorTest extends TestCase {
         $pdo = null;
     }
 
+    /**
+     * @covers ::__construct
+     */
     public function testLoadCreatorNoId() {
         $dsn = "sqlsrv:Server=DESKTOP-6PN824R\SQLEXPRESS;Database=SpinnerRack;";
         $username = "SpinnerRackUser";
@@ -91,6 +111,9 @@ class CreatorTest extends TestCase {
         $this->assertEquals("", $creator->getFirstName());
     }
     
+    /**
+     * @covers ::loadCreatorById
+     */
     public function testLoadCreatorByIdSuccess() {
         $dsn = "sqlsrv:Server=DESKTOP-6PN824R\SQLEXPRESS;Database=SpinnerRack;";
         $username = "SpinnerRackUser";
@@ -107,6 +130,9 @@ class CreatorTest extends TestCase {
         $this->assertEquals("Jim", $creator->getFirstName());        
     }
     
+    /**
+     * @covers ::loadCreatorById
+     */
     public function testLoadCreatorByIdFail() {
         $dsn = "sqlsrv:Server=DESKTOP-6PN824R\SQLEXPRESS;Database=SpinnerRack;";
         $username = "SpinnerRackUser";

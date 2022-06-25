@@ -1,1 +1,5 @@
 /src/phpunit.txt
+/src/tests/command line phpunit.txt
+/src/tests/code-coverage/
+/src/tests/cov.html/
+/src/tests/phpunit.xml

@@ -1,6 +1,6 @@
 <?php
 
-class DbConnection {
+class DbConn {
 
     private $dsn;
     private $username;
@@ -34,12 +34,12 @@ class DbConnection {
     public function connect() {
         try {
             $this->connection = new PDO($this->dsn, $this->username, $this->password);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             print $e->getMessage();
             error_log($e->getMessage());
             error_log($e->getTraceAsString());
             return false;
-        } catch (\PDOException $p) {
+        } catch (PDOException $p) {
             print $p->getMessage();
             error_log($p->getMessage());
             error_log($p->getTraceAsString());
