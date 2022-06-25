@@ -1,12 +1,11 @@
 <?php
 // this file would more or less be the controller  
 // decides what to do, then passes results through ajax back to view
-namespace src;
+
+//namespace src;
 require 'DbConfig.php';
 require 'DbConnection.php';
 require 'Creator.php';
-
-
 
 $dbConn = new DbConnection($dsn, $username, $password);
 $connected = $dbConn->connect();

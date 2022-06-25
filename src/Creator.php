@@ -1,6 +1,5 @@
 <?php
-namespace src;
-
+// php C:\php\phpunit-9.5.phar --generate-configuration
 class Creator {
 
     private $id;
