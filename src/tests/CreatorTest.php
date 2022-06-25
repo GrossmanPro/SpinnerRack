@@ -37,6 +37,21 @@ class CreatorTest extends TestCase {
     }
     
     /**
+     * @covers ::getFullName
+     */
+    public function testGetFullNameSuccess() {
+        $dsn = "sqlsrv:Server=DESKTOP-6PN824R\SQLEXPRESS;Database=SpinnerRack;";
+        $username = "SpinnerRackUser";
+        $password = "password";
+        $pdo = new PDO($dsn, $username, $password);
+        // John Byrne is Creator 1
+        $creator = new Creator($pdo, 1);
+        $this->assertEquals("John Byrne", $creator->getFullName(false));
+        $this->assertEquals("Byrne, John", $creator->getFullName(true));
+    }
+    
+    
+    /**
      * @covers ::setLastName
      */
     public function testSetLastNameSuccess() {
