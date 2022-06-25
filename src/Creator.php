@@ -10,6 +10,8 @@ class Creator {
     public function __construct(object $db, int $id = 0) {
         $this->connection = $db;
         $this->id = $id;
+        $this->firstName = "";
+        $this->lastName = "";
         if ($this->id) {
             $this->loadCreator();
         }
@@ -39,17 +41,23 @@ class Creator {
         }
     }
 
-    public function loadCreator() {
-        if ($this->id) {
-            $sql = 'SELECT * FROM Creators WHERE Id = :id';
-            $stmt = $this->connection->prepare($sql);
-            $stmt->execute(array($this->id));
-            $creator = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
-            $this->firstName = $creator['FirstName'];
-            $this->lastName = $creator['LastName'];
-        } else {
-            return false;
-        }
+    private function loadCreator() {
+        $sql = 'SELECT * FROM Creators WHERE Id = :id';
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute(array($this->id));
+        $creator = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+        $this->firstName = $creator['FirstName'];
+        $this->lastName = $creator['LastName'];
+    }
+    
+    public function loadCreatorById(int $id) {
+        $sql = 'SELECT * FROM Creators WHERE Id = :id';
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute(array($id));
+        $creator = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+        $this->firstName = $creator['FirstName'];
+        $this->lastName = $creator['LastName'];
+        $this->id = $id;
     }
 
     public function saveCreator() {
