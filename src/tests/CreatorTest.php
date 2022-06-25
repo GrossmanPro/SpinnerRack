@@ -1,8 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-//require '../DbConfig.php';
-//require '../DbConnection.php';
 require '../Creator.php';
 
 class CreatorTest extends TestCase {
