@@ -107,4 +107,17 @@ class CreatorTest extends TestCase {
         $this->assertEquals("Jim", $creator->getFirstName());        
     }
     
+    public function testLoadCreatorByIdFail() {
+        $dsn = "sqlsrv:Server=DESKTOP-6PN824R\SQLEXPRESS;Database=SpinnerRack;";
+        $username = "SpinnerRackUser";
+        $password = "password";
+        $pdo = new PDO($dsn, $username, $password);
+        $creator = new Creator($pdo);
+        try {
+            $creator->loadCreatorById(0);
+        } catch (Exception $e) {
+            $this->assertEquals("This creator does not exist", $e->getMessage());
+        }
+    }
+    
 }

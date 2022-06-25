@@ -54,10 +54,14 @@ class Creator {
         $sql = 'SELECT * FROM Creators WHERE Id = :id';
         $stmt = $this->connection->prepare($sql);
         $stmt->execute(array($id));
-        $creator = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
-        $this->firstName = $creator['FirstName'];
-        $this->lastName = $creator['LastName'];
-        $this->id = $id;
+        $creator = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (count($creator)) {
+            $this->firstName = $creator[0]['FirstName'];
+            $this->lastName = $creator[0]['LastName'];
+            $this->id = $id;
+        } else {
+            throw new Exception("This creator does not exist");
+        }
     }
 
     public function saveCreator() {
