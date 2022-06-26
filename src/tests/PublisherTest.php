@@ -27,6 +27,9 @@ class PublisherTest extends TestCase {
         $this->assertEquals($id, $publisher->getPublisherId());
         return $id;
     }
+    
+    // id is a string in signature because lastInsertId 
+    // returns its value as a string, not an integer
     /**
      * @depends testSavePublisherNewSuccess
      * @covers \Publisher::loadPublisherById
