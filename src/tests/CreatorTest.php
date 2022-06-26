@@ -109,12 +109,14 @@ class CreatorTest extends TestCase {
         global $pdo;
         $creator = new Creator();
         $creator->setFirstName("Delete");
-        $creator->setLastName("Me99");
+        $creator->setLastName("Me78");
         $id = $creator->saveCreator($pdo);
         $this->assertTrue(ctype_digit($id));
         return $id;
     }
     
+    // id is a string in signature because lastInsertId 
+    // returns its value as a string, not an integer
     /**
      * @depends testSaveCreatorNewSuccess
      * @covers ::saveCreator
@@ -122,10 +124,10 @@ class CreatorTest extends TestCase {
     public function testSaveCreatorUpdateSuccess(string $id) {
         global $pdo;
         $creator = new Creator();
-        $creator->loadCreatorById($pdo, $id);
+        $creator->loadCreatorById($pdo, (int)$id);
         $creator->setFirstName("Joe");
-        $id = $creator->saveCreator($pdo);
-        $this->assertTrue(ctype_digit($id));
+        $idPostSave = $creator->saveCreator($pdo);   
+        $this->assertTrue(is_int($idPostSave));
         $this->assertEquals("Joe", $creator->getFirstName());
     }
     
