@@ -11,10 +11,11 @@ class PublisherTest extends TestCase {
     // remember to use test prefix, e.g. testSetFirstNameSuccess 
     
     /**
-     * @covers ::savePublisher
-     * @covers ::setPublisherName
-     * @covers ::getPublisherName
-     * @covers ::getPublisherId
+     * @covers \Publisher::savePublisher
+     * @covers \Publisher::setPublisherName
+     * @covers \Publisher::getPublisherName
+     * @covers \Publisher::getPublisherId
+     * @covers \Publisher::__construct
      */
     public function testSavePublisherNewSuccess() {
         global $pdo;
@@ -28,9 +29,10 @@ class PublisherTest extends TestCase {
     }
     /**
      * @depends testSavePublisherNewSuccess
-     * @covers ::loadPublisherById
-     * @covers ::savePublisher
-     * @covers ::getPublisherName
+     * @covers \Publisher::loadPublisherById
+     * @covers \Publisher::savePublisher
+     * @covers \Publisher::getPublisherName
+     * @covers \Publisher::__construct
      */
     public function testSavePublisherUpdateSuccess(string $id) { 
         global $pdo;
@@ -43,7 +45,8 @@ class PublisherTest extends TestCase {
     }
     
     /**
-     * @covers ::loadPublisherById
+     * @covers \Publisher::loadPublisherById
+     * @covers \Publisher::__construct
      */
     public function testLoadPublisherByIdFail() {
         global $pdo;

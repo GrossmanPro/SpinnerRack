@@ -10,7 +10,8 @@ class CreatorTest extends TestCase {
     // remember to use test prefix, e.g. testSetFirstNameSuccess   
     
     /**
-     * @covers ::setFirstName
+     * @covers \Creator::setFirstName
+     * @covers \Creator::__construct
      */
     public function testSetFirstNameSuccess() {
         // TODO
@@ -22,7 +23,8 @@ class CreatorTest extends TestCase {
     }
 
     /**
-     * @covers ::setFirstName
+     * @covers \Creator::setFirstName
+     * @covers \Creator::__construct
      */
     public function testSetFirstNameFail() {
         global $pdo;
@@ -32,7 +34,8 @@ class CreatorTest extends TestCase {
     }
     
     /**
-     * @covers ::getFullName
+     * @covers \Creator::getFullName
+     * @covers \Creator::__construct
      */
     public function testGetFullNameSuccess() {
         global $pdo;
@@ -44,7 +47,9 @@ class CreatorTest extends TestCase {
     }    
     
     /**
-     * @covers ::setLastName
+     * @covers \Creator::setLastName
+     * @covers \Creator::getLastName
+     * @covers \Creator::__construct
      */
     public function testSetLastNameSuccess() {
         global $pdo;
@@ -54,7 +59,9 @@ class CreatorTest extends TestCase {
     }
 
     /**
-     * @covers ::setLastName
+     * @covers \Creator::setLastName
+     * @covers \Creator::getLastName
+     * @covers \Creator::__construct
      */
     public function testSetLastNameFail() {
         global $pdo;
@@ -64,7 +71,9 @@ class CreatorTest extends TestCase {
     }
 
     /**
-     * @covers ::__construct
+     * @covers \Creator::__construct
+     * @covers \Creator::getLastName
+     * @covers \Creator::getFirstName
      */
     public function testLoadCreatorNoId() {
         global $pdo;
@@ -74,7 +83,10 @@ class CreatorTest extends TestCase {
     }
     
     /**
-     * @covers ::loadCreatorById
+     * @covers \Creator::loadCreatorById
+     * @covers \Creator::getLastName
+     * @covers \Creator::getFirstName
+     * @covers \Creator::__construct
      */
     public function testLoadCreatorByIdSuccess() {
         global $pdo;
@@ -90,7 +102,8 @@ class CreatorTest extends TestCase {
     }
     
     /**
-     * @covers ::loadCreatorById
+     * @covers \Creator::loadCreatorById
+     * @covers \Creator::__construct
      */
     public function testLoadCreatorByIdFail() {
         global $pdo;
@@ -103,13 +116,15 @@ class CreatorTest extends TestCase {
     }
     
     /**
-     * @covers ::saveCreator
+     * @covers \Creator::saveCreator
+     * @covers \Creator::setLastName
+     * @covers \Creator::__construct
      */
     public function testSaveCreatorNewSuccess() {
         global $pdo;
         $creator = new Creator();
         $creator->setFirstName("Delete");
-        $creator->setLastName("Me78");
+        $creator->setLastName("Me79");
         $id = $creator->saveCreator($pdo);
         $this->assertTrue(ctype_digit($id));
         return $id;
@@ -119,7 +134,10 @@ class CreatorTest extends TestCase {
     // returns its value as a string, not an integer
     /**
      * @depends testSaveCreatorNewSuccess
-     * @covers ::saveCreator
+     * @covers \Creator::saveCreator
+     * @covers \Creator::loadCreatorById
+     * @covers \Creator::getFirstName
+     * @covers \Creator::__construct
      */
     public function testSaveCreatorUpdateSuccess(string $id) {
         global $pdo;
