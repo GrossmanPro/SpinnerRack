@@ -46,6 +46,9 @@ class Creator {
             $this->lastName = $creator[0]['LastName'];
             $this->id = $id;
         } else {
+            $this->firstName = "";
+            $this->lastName = "";
+            $this->id = 0;
             throw new Exception("This creator does not exist");
         }
     }

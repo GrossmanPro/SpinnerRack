@@ -44,13 +44,12 @@ class CreatorTest extends TestCase {
         $username = "SpinnerRackUser";
         $password = "password";
         $pdo = new PDO($dsn, $username, $password);
-        // John Byrne is Creator 1
+        // Jim Starlin is Creator 5
         $creator = new Creator();
-        $creator->loadCreatorById($pdo, 1);
-        $this->assertEquals("John Byrne", $creator->getFullName(false));
-        $this->assertEquals("Byrne, John", $creator->getFullName(true));
-    }
-    
+        $creator->loadCreatorById($pdo, 5);
+        $this->assertEquals("Jim Starlin", $creator->getFullName(false));
+        $this->assertEquals("Starlin, Jim", $creator->getFullName(true));
+    }    
     
     /**
      * @covers ::setLastName
@@ -140,10 +139,29 @@ class CreatorTest extends TestCase {
         $password = "password";
         $pdo = new PDO($dsn, $username, $password);
         $creator = new Creator();
-        $creator->setFirstName("Neal");
-        $creator->setLastName("Adams");
+        $creator->setFirstName("Delete");
+        $creator->setLastName("Me6");
         $id = $creator->saveCreator($pdo);
         $this->assertTrue(ctype_digit($id));
+        $pdo = null;
+        return $id;
+    }
+    
+    /**
+     * @depends testSaveCreatorNewSuccess
+     * @covers ::saveCreator
+     */
+    public function testSaveCreatorUpdateSuccess(string $id) {
+        $dsn = "sqlsrv:Server=DESKTOP-6PN824R\SQLEXPRESS;Database=SpinnerRack;";
+        $username = "SpinnerRackUser";
+        $password = "password";
+        $pdo = new PDO($dsn, $username, $password);
+        $creator = new Creator();
+        $creator->loadCreatorById($pdo, $id);
+        $creator->setFirstName("Joe");
+        $id = $creator->saveCreator($pdo);
+        $this->assertTrue(ctype_digit($id));
+        $this->assertEquals("Joe", $creator->getFirstName());
         $pdo = null;
     }
     
