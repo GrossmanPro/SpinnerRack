@@ -14,6 +14,7 @@ class PublisherTest extends TestCase {
      * @covers ::savePublisher
      * @covers ::setPublisherName
      * @covers ::getPublisherName
+     * @covers ::getPublisherId
      */
     public function testSavePublisherNewSuccess() {
         global $pdo;
@@ -22,6 +23,7 @@ class PublisherTest extends TestCase {
         $id = $publisher->savePublisher($pdo);
         $this->assertTrue(ctype_digit($id));
         $this->assertEquals("Delete Pub", $publisher->getPublisherName());
+        $this->assertEquals($id, $publisher->getPublisherId());
         return $id;
     }
     /**
