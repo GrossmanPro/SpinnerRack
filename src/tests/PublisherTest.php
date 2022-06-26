@@ -40,4 +40,17 @@ class PublisherTest extends TestCase {
         $this->assertEquals("Delete This Publisher", $publisher->getPublisherName());
     }
     
+    /**
+     * @covers ::loadPublisherById
+     */
+    public function testLoadPublisherByIdFail() {
+        global $pdo;
+        $publisher = new Publisher();
+        try {
+            $publisher->loadPublisherById($pdo, 0);
+        } catch (Exception $e) {
+            $this->assertEquals("This publisher does not exist", $e->getMessage());
+        }
+    }
+    
 }
