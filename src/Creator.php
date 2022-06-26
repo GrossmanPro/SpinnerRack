@@ -1,20 +1,15 @@
 <?php
-// php C:\php\phpunit-9.5.phar --generate-configuration
+
 class Creator {
 
     private $id;
     private $firstName;
     private $lastName;
-    protected $connection;
 
-    public function __construct(object $db, int $id = 0) {
-        $this->connection = $db;
-        $this->id = $id;
+    public function __construct() {
+        $this->id = 0;
         $this->firstName = "";
         $this->lastName = "";
-        if ($this->id) {
-            $this->loadCreator();
-        }
     }
 
     public function getFirstName(): string {
@@ -41,18 +36,9 @@ class Creator {
         }
     }
 
-    private function loadCreator() {
+   public function loadCreatorById(object $pdo, int $id) {
         $sql = 'SELECT * FROM Creators WHERE Id = :id';
-        $stmt = $this->connection->prepare($sql);
-        $stmt->execute(array($this->id));
-        $creator = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
-        $this->firstName = $creator['FirstName'];
-        $this->lastName = $creator['LastName'];
-    }
-    
-    public function loadCreatorById(int $id) {
-        $sql = 'SELECT * FROM Creators WHERE Id = :id';
-        $stmt = $this->connection->prepare($sql);
+        $stmt = $pdo->prepare($sql);
         $stmt->execute(array($id));
         $creator = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (count($creator)) {
@@ -64,16 +50,18 @@ class Creator {
         }
     }
 
-    public function saveCreator() {
+    public function saveCreator(object $pdo) {
         if ($this->id) {
             $sql = 'UPDATE Creators SET FirstName = :FirstName, LastName = :LastName WHERE Id = :ID';
-            $stmt = $this->connection->prepare($sql);
+            $stmt = $pdo->prepare($sql);
             $stmt->execute(array($this->firstName, $this->lastName, $this->id));
         } else {
             $sql = 'INSERT INTO Creators (FirstName, LastName) VALUES (:FirstName, :LastName)';
-            $stmt = $this->connection->prepare($sql);
+            $stmt = $pdo->prepare($sql);
             $stmt->execute(array($this->firstName, $this->lastName));
+            $this->id = $pdo->lastInsertId();
         }
+        return $this->id;
     }
 
 }

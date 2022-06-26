@@ -7,15 +7,12 @@ require_once 'DbConfig.php';
 require_once 'DbConn.php';
 require_once 'Creator.php';
 
-$dbConn = new DbConn($dsn, $username, $password);
-$connected = $dbConn->connect();
 
-if ($connected) {    
-    $creator = new Creator($dbConn->connection);
-    $creator->setFirstName("Stan");
-    $creator->setLastName("Lee");
-    $creator->saveCreator();
-    print "I just saved " . $creator->getFullName();
-} else {
-    print 'oh, f***';
-}
+
+   
+//    $creator = new Creator();
+//    $creator->setFirstName("Robert");
+//    $creator->setLastName("Kanigher");
+//    $id = $creator->saveCreator($pdo);
+//    print "I just saved " . $creator->getFullName();
+//    print "<br>" . $id;
