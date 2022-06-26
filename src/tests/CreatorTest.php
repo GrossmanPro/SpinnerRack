@@ -8,6 +8,7 @@ require_once '../Creator.php';
 class CreatorTest extends TestCase {
     
     // remember to use test prefix, e.g. testSetFirstNameSuccess   
+    // beStrictAboutCoversAnnotation="false" in PHPUnit configuration file
     
     /**
      * @covers \Creator::setFirstName

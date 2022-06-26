@@ -9,6 +9,7 @@ require_once '../Publisher.php';
 class PublisherTest extends TestCase {
     
     // remember to use test prefix, e.g. testSetFirstNameSuccess 
+    // beStrictAboutCoversAnnotation="false" in PHPUnit configuration file
     
     /**
      * @covers \Publisher::savePublisher
