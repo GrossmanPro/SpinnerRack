@@ -19,7 +19,6 @@ class CreatorTest extends TestCase {
         $creator = new Creator($pdo);
         $creator->setFirstName("Eric");
         $this->assertEquals("Eric", $creator->getFirstName());
-        //$pdo = null;
     }
 
     /**
@@ -30,7 +29,6 @@ class CreatorTest extends TestCase {
         $creator = new Creator($pdo);
         $creator->setFirstName("Eric");
         $this->assertFalse("Elvis" === $creator->getFirstName());
-        //$pdo = null;
     }
     
     /**
@@ -111,7 +109,7 @@ class CreatorTest extends TestCase {
         global $pdo;
         $creator = new Creator();
         $creator->setFirstName("Delete");
-        $creator->setLastName("Me11");
+        $creator->setLastName("Me99");
         $id = $creator->saveCreator($pdo);
         $this->assertTrue(ctype_digit($id));
         return $id;
