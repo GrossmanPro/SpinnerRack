@@ -125,7 +125,7 @@ class CreatorTest extends TestCase {
         global $pdo;
         $creator = new Creator();
         $creator->setFirstName("Delete");
-        $creator->setLastName("Me79");
+        $creator->setLastName("Me001");
         $id = $creator->saveCreator($pdo);
         $this->assertTrue(ctype_digit($id));
         return $id;
@@ -148,6 +148,10 @@ class CreatorTest extends TestCase {
         $idPostSave = $creator->saveCreator($pdo);   
         $this->assertTrue(is_int($idPostSave));
         $this->assertEquals("Joe", $creator->getFirstName());
+        // reset for another run
+        $sql2 = 'DELETE FROM Creators WHERE Id = :Id';
+        $stmt = $pdo->prepare($sql2);
+        $stmt->execute(array($id));
     }
     
 }
