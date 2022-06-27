@@ -74,7 +74,7 @@ class Title {
         
     }
 
-    public function saveTitle(object $pdo) {
+    public function saveTitle(object $pdo): int {
         if ($this->id) {
             $sql = 'UPDATE Titles SET '
                     . 'Name = :Name, '
