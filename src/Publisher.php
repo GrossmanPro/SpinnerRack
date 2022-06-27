@@ -37,7 +37,7 @@ class Publisher {
         }        
     }
     
-    public function savePublisher(object $pdo) {
+    public function savePublisher(object $pdo): int {
         if ($this->id) {
             $sql = 'UPDATE Publishers SET Publisher = :Publisher WHERE Id = :Id';
             $stmt = $pdo->prepare($sql);
