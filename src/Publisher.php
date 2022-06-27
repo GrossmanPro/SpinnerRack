@@ -28,7 +28,7 @@ class Publisher {
         $stmt->execute(array($id));
         $pub = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (count($pub)) {
-            $this->publisherName = $pub[0]['FirstName'];
+            $this->publisherName = $pub[0]['Publisher'];
             $this->id = $id;
         } else {
             $this->publisherName = "";
@@ -39,13 +39,13 @@ class Publisher {
     
     public function savePublisher(object $pdo) {
         if ($this->id) {
-            $sql = 'UPDATE Publishers SET Publisher = :publisherName WHERE Id = :Id';
+            $sql = 'UPDATE Publishers SET Publisher = :Publisher WHERE Id = :Id';
             $stmt = $pdo->prepare($sql);
             $stmt->execute(array($this->publisherName, $this->id));
         } else {
-            $sql = 'INSERT INTO Publishers (Publisher) VALUES (:PublisherName)';
+            $sql = 'INSERT INTO Publishers (Publisher) VALUES (:Publisher)';
             $stmt = $pdo->prepare($sql);
-            $stmt->execute(array($this->pubisherName));
+            $stmt->execute(array($this->publisherName));
             $this->id = $pdo->lastInsertId();
         }
         return $this->id;
