@@ -19,7 +19,7 @@ class Publisher {
     }
     
     public function setPublisherName(string $name) {
-        $this->publisherName = filter_var($name, FILTER_SANITIZE_STRING);
+        $this->publisherName = filter_var($name, FILTER_UNSAFE_RAW);
     }
     
     public function loadPublisherById(object $pdo, int $id) {
