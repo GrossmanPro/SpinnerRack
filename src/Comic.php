@@ -209,6 +209,7 @@ class Comic {
         $params[] = $this->notes;
         $params[] = $this->hardCopy;
         $params[] = $this->wantList;
+        $params[] = $this->stars;
         if ($this->id) {
             $sql = 'UPDATE Comics SET '
                     . 'TitleId = :TitleId, '
@@ -218,7 +219,8 @@ class Comic {
                     . 'Story = :Story, '
                     . 'Notes = :Notes, '
                     . 'HardCopy = :HardCopy, '
-                    . 'WantList = :WantList '
+                    . 'WantList = :WantList , '
+                    . 'Stars = :Stars '
                     . 'WHERE Id = :Id';
             $params[] = $this->id;
         } else {
@@ -230,7 +232,8 @@ class Comic {
                     . 'Story, '
                     . 'Notes, '
                     . 'HardCopy, '
-                    . 'WantList) VALUES ('
+                    . 'WantList, '
+                    . 'Stars) VALUES ('
                     . ':TitleId, '
                     . ':Issue, '
                     . ':Month, '
@@ -238,7 +241,8 @@ class Comic {
                     . ':Story, '
                     . ':Notes, '
                     . ':HardCopy, '
-                    . ':WantList)';
+                    . ':WantList, '
+                    . ':Stars)';
         }
         $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
