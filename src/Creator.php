@@ -64,7 +64,7 @@ class Creator {
             $stmt->execute(array($this->firstName, $this->lastName));
             $this->id = $pdo->lastInsertId();
         }
-        return $this->id;
+        return (int)$this->id;
     }
 
 }

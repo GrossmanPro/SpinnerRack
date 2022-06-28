@@ -242,7 +242,7 @@ class Comic {
         }
         $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
-        $this->id = $pdo->lastInsertId();
+        $this->id = (int)$pdo->lastInsertId();
         return $this->id;
     }
 

@@ -23,14 +23,14 @@ class PublisherTest extends TestCase {
         $publisher = new Publisher();
         $publisher->setPublisherName("Delete Pub");
         $id = $publisher->savePublisher($pdo);
-        $this->assertTrue(ctype_digit($id));
+        // savePublisher() might return an actual int or an
+        // int in string form from lastInsertId()
+        $this->assertTrue(is_int($id));
         $this->assertEquals("Delete Pub", $publisher->getPublisherName());
         $this->assertEquals($id, $publisher->getPublisherId());
         return $id;
     }
     
-    // id is a string in signature because lastInsertId 
-    // returns its value as a string, not an integer
     /**
      * @depends testSavePublisherNewSuccess
      * @covers \Publisher::loadPublisherById
@@ -38,7 +38,7 @@ class PublisherTest extends TestCase {
      * @covers \Publisher::getPublisherName
      * @covers \Publisher::__construct
      */
-    public function testSavePublisherUpdateSuccess(string $id) { 
+    public function testSavePublisherUpdateSuccess(int $id) { 
         global $pdo;
         $publisher = new Publisher();
         $publisher->loadPublisherById($pdo, (int)$id);

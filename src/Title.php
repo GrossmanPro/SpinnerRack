@@ -98,7 +98,7 @@ class Title {
                 $this->startYear, 
                 $this->volume,
                 $this->publisherId));
-            $this->id = $pdo->lastInsertId();
+            $this->id = (int)$pdo->lastInsertId();
         }
         return $this->id;
     }    

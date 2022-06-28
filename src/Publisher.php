@@ -46,9 +46,9 @@ class Publisher {
             $sql = 'INSERT INTO Publishers (Publisher) VALUES (:Publisher)';
             $stmt = $pdo->prepare($sql);
             $stmt->execute(array($this->publisherName));
-            $this->id = $pdo->lastInsertId();
+            $this->id = (int)$pdo->lastInsertId();
         }
-        return $this->id;
+        return $this->id;  
     }
     
 }

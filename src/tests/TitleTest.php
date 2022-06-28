@@ -133,7 +133,7 @@ class TitleTest extends TestCase {
         $title->setStartYear(1976);
         $title->setVolume(1);
         $id = $title->saveTitle($pdo);
-        $this->assertTrue(ctype_digit($id));
+        $this->assertTrue(is_int($id));
         $this->assertEquals($id, $title->getId());
         return $id;        
     }
@@ -149,7 +149,7 @@ class TitleTest extends TestCase {
      * @covers \Title::saveTitle
      * @covers \Title::getName
      */
-    public function testUpdateExistingTitle(string $id) {
+    public function testUpdateExistingTitle(int $id) {
         global $pdo;
         $title = new Title();
         $title->loadTitleById($pdo, $id);

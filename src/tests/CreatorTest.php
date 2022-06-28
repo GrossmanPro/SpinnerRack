@@ -125,9 +125,9 @@ class CreatorTest extends TestCase {
         global $pdo;
         $creator = new Creator();
         $creator->setFirstName("Delete");
-        $creator->setLastName("Me001");
+        $creator->setLastName("Me041");
         $id = $creator->saveCreator($pdo);
-        $this->assertTrue(ctype_digit($id));
+        $this->assertTrue(is_int($id));
         return $id;
     }
     
@@ -140,7 +140,7 @@ class CreatorTest extends TestCase {
      * @covers \Creator::getFirstName
      * @covers \Creator::__construct
      */
-    public function testSaveCreatorUpdateSuccess(string $id) {
+    public function testSaveCreatorUpdateSuccess(int $id) {
         global $pdo;
         $creator = new Creator();
         $creator->loadCreatorById($pdo, (int)$id);
