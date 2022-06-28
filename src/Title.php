@@ -25,7 +25,7 @@ class Title {
     }
     
     public function setName(string $name) {
-        $this->name = filter_var($name, FILTER_SANITIZE_STRING); 
+        $this->name = filter_var($name, FILTER_UNSAFE_RAW); 
     }
     
     public function getStartYear(): int {
