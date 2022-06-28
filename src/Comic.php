@@ -89,7 +89,7 @@ class Comic {
 
     public function setStory(string $story) {
         if (strlen($story) <= 1000) {
-            $this->story = filter_var($story, FILTER_SANITIZE_STRING);
+            $this->story = filter_var($story, FILTER_UNSAFE_RAW);
         } else {
             throw new OutOfBoundsException("Story title too long--must be 1,000 characters or less");
         }
@@ -100,7 +100,7 @@ class Comic {
     }
 
     public function setNotes(string $notes) {
-        $this->notes = filter_var($notes, FILTER_SANITIZE_STRING);
+        $this->notes = filter_var($notes, FILTER_UNSAFE_RAW);
     }
 
     public function getStars(): int {
@@ -247,7 +247,7 @@ class Comic {
         $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
         $this->id = (int)$pdo->lastInsertId();
-        return $this->id;
+        return $this->id;  // don't really need to return this if it's in the object...
     }
 
 }
