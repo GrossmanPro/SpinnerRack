@@ -1,4 +1,5 @@
 <?php
+include_once 'Creator.php';
 
 class Comic {
 
@@ -12,6 +13,8 @@ class Comic {
     private $stars;
     private $hardCopy;
     private $wantList;
+    private $scripters;
+    private $artists;
 
     public function __construct() {
         $this->id = 0;
@@ -24,6 +27,8 @@ class Comic {
         $this->stars = 0;
         $this->hardCopy = 1; // default to physical (vs digital)
         $this->wantList = 0; // default to owned comic
+        $this->scripters = array();
+        $this->artists = array();
     }
 
     public function getId(): int {
@@ -105,7 +110,7 @@ class Comic {
     public function setStars(int $stars) {
         $saveStars = filter_var($stars, FILTER_SANITIZE_NUMBER_INT);
         if ($saveStars >= 0 && $saveStars <= 5) {
-            $this->stars = $saveStars;
+            $this->stars = $saveStars; // 0 = not rated
         } else {
             throw new OutOfBoundsException("This is not a valid rating");
         }
@@ -142,8 +147,55 @@ class Comic {
             $this->notes = $comic[0]['Notes'];
             $this->hardCopy = $comic[0]['HardCopy'];
             $this->wantList = $comic[0]['WantList'];
+            $this->loadScripters($pdo, $id);
+            $this->loadArtists($pdo, $id);
         } else {
             throw new Exception("This comic does not exist");
+        }
+    }
+    
+    // may be called multiple times for books with more than one writer
+    public function saveScripter(object $pdo, int $creatorId) {
+        if ($this->id) {
+        $sql = 'INSERT INTO ScriptBy (ComicId, CreatorId) VALUES (:ComicId, :CreatorId)';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array($this->id, $creatorId));
+        } else {
+            throw new Exception ("Comic must be saved before assigning creators");
+        }
+    }
+    
+    public function saveArtist(object $pdo, int $creatorId) {
+        if ($this->id) {
+            $sql = 'INSERT INTO ArtBy (ComicId, CreatorId) VALUES (:ComicId, :CreatorId)';
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(array($this->id, $creatorId));
+        } else {
+            throw new Exception ("Comic must be saved before assigning creators");
+        }        
+    }
+    
+    private function loadScripters(object $pdo, int $comicId) {
+        $sql = 'SELECT CreatorId FROM ScriptBy WHERE ComicId = :ComicId';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array($comicId));
+        $scripters = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($scripters as $scripter) {
+            $scriptBy = new Creator();
+            $scriptBy->loadCreatorById($pdo, $scripter['CreatorId']);
+            $this->scripters[] = $scriptBy;
+        }
+    }
+    
+    private function loadArtists(object $pdo, int $comicId) {
+        $sql = 'SELECT CreatorId FROM ArtBy WHERE ComicId = :ComicId';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array($comicId));
+        $artists = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($artists as $artist) {
+            $artBy = new Creator();
+            $artBy->loadCreatorById($pdo, $artist['CreatorId']);
+            $this->artists[] = $artBy;
         }
     }
 
@@ -190,6 +242,7 @@ class Comic {
         }
         $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
+        $this->id = $pdo->lastInsertId();
         return $this->id;
     }
 
