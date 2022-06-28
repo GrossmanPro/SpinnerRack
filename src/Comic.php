@@ -63,7 +63,7 @@ class Comic {
 
     public function setMonth(int $month) {
         $saveMonth = filter_var($month, FILTER_SANITIZE_NUMBER_INT);
-        if ($saveMonth >= 1 && $saveYear <= 12) {
+        if ($saveMonth >= 1 && $saveMonth <= 12) {
             $this->month = $saveMonth;
         } else {
             throw new OutOfBoundsException("This is not a valid month");
