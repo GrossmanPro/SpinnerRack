@@ -23,8 +23,6 @@ class PublisherTest extends TestCase {
         $publisher = new Publisher();
         $publisher->setPublisherName("Delete Pub");
         $id = $publisher->savePublisher($pdo);
-        // savePublisher() might return an actual int or an
-        // int in string form from lastInsertId()
         $this->assertTrue(is_int($id));
         $this->assertEquals("Delete Pub", $publisher->getPublisherName());
         $this->assertEquals($id, $publisher->getPublisherId());
@@ -46,6 +44,10 @@ class PublisherTest extends TestCase {
         $idPostSave = $publisher->savePublisher($pdo);  
         $this->assertTrue(is_int($idPostSave));    
         $this->assertEquals("Delete This Publisher", $publisher->getPublisherName());
+        
+        $sql = 'DELETE FROM Publishers WHERE Id = :Id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array($id));
     }
     
     /**
