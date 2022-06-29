@@ -17,7 +17,7 @@ class Creator {
     }
 
     public function setFirstName(string $firstName) {
-        $this->firstName = filter_var($firstName, FILTER_SANITIZE_STRING);
+        $this->firstName = filter_var($firstName, FILTER_UNSAFE_RAW);
     }
 
     public function getLastName(): string {
@@ -25,7 +25,7 @@ class Creator {
     }
 
     public function setLastName(string $lastName) {
-        $this->lastName = filter_var($lastName, FILTER_SANITIZE_STRING);
+        $this->lastName = filter_var($lastName, FILTER_UNSAFE_RAW);
     }
 
     public function getFullName(bool $lastNameFirst = false): string {
