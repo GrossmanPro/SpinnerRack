@@ -36,7 +36,7 @@ class Comic {
     }
 
     public function getTitleId(): int {
-        return $this->getTitleId();
+        return $this->titleId;
     }
 
     public function setTitleId(int $titleId) {
