@@ -110,7 +110,7 @@ class Comic {
     public function setStars(int $stars) {
         $saveStars = filter_var($stars, FILTER_SANITIZE_NUMBER_INT);
         if ($saveStars >= 0 && $saveStars <= 5) {
-            $this->stars = $saveStars; // 0 = not rated
+            $this->stars = $saveStars; // 0 = not rated            
         } else {
             throw new OutOfBoundsException("This is not a valid rating");
         }
@@ -147,6 +147,7 @@ class Comic {
             $this->notes = $comic[0]['Notes'];
             $this->hardCopy = $comic[0]['HardCopy'];
             $this->wantList = $comic[0]['WantList'];
+            $this->stars = $comic[0]['Stars'];
             $this->loadScripters($pdo, $id);
             $this->loadArtists($pdo, $id);
         } else {
