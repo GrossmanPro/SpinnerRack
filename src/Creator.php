@@ -11,6 +11,10 @@ class Creator {
         $this->firstName = "";
         $this->lastName = "";
     }
+    
+    public function getId() {
+        return $this->id;
+    }
 
     public function getFirstName(): string {
         return $this->firstName;
