@@ -23,7 +23,8 @@ class ComicTest extends TestCase {
     }
     
     /**
-     * @covers /Comic::setIssue
+     * @covers /Comic::setMonth
+     * @covers /Comic::getMonth
      */
     public function testSetIssueFail() {
         $comic = new Comic();
@@ -31,6 +32,57 @@ class ComicTest extends TestCase {
             $comic->setIssue(-9);
         } catch (OutOfBoundsException $o) {
             $this->assertEquals("This is not a valid issue number", $o->getMessage());            
+        }
+    }
+    
+    /**
+     * @covers /Comic::setIssue
+     */
+    public function testSetMonthFail() {
+        $comic = new Comic();
+        try {
+            $comic->setMonth(-9);
+        } catch (OutOfBoundsException $o) {
+            $this->assertEquals("This is not a valid month", $o->getMessage());            
+        }
+    }
+    
+    /**
+     * @covers /Comic::setYear
+     * @covers /Comic::getYear
+     */
+    public function testSetYearFail() {
+        $comic = new Comic();
+        try {
+            $comic->setYear(2300);
+        } catch (OutOfBoundsException $o) {
+            $this->assertEquals("This is not a valid year", $o->getMessage());            
+        }
+    }
+    
+    /**
+     * @covers \Comic::setScripter
+     */
+    public function testSetScripterFail() {
+        global $pdo;
+        $comic = new Comic();
+        try {            
+            $comic->setScripter($pdo, 1);
+        } catch (Exception $e) {
+            $this->assertEquals("Comic must be saved before assigning creators", $e->getMessage());
+        }
+    }
+    
+    /**
+     * @covers \Comic::setArtist
+     */
+    public function testSetArtistFail() {
+        global $pdo;
+        $comic = new Comic();
+        try {            
+            $comic->setArtist($pdo, 1);
+        } catch (Exception $e) {
+            $this->assertEquals("Comic must be saved before assigning creators", $e->getMessage());
         }
     }
     
@@ -59,12 +111,15 @@ class ComicTest extends TestCase {
      * @covers \Comic::setWantList
      * @covers \Comic::setStory
      * @covers \Comic::setNotes
+     * @covers \Comic::getId
+     * @covers \Comic::setArtist
+     * @covers \Comic::setScripter
      */
     public function testCreateNewComic(): int{
         global $pdo;
         $comic = new Comic();
         $comic->setTitleId(2); 
-        $comic->setIssue(228);
+        $comic->setIssue(239);
         $comic->setMonth(12);
         $comic->setYear(1979);
         $comic->setStars(3);
@@ -73,7 +128,10 @@ class ComicTest extends TestCase {
         $comic->setStory("Generic Story");
         $comic->setNotes("Notes go here");
         $id = $comic->saveComic($pdo);
-        $this->assertTrue(is_int($id));     
+        $this->assertTrue(is_int($comic->getId()));   
+        $comic->setArtist($pdo, 1);
+        $comic->setScripter($pdo, 1);        
+        
         return $id;
     }
      
@@ -86,7 +144,9 @@ class ComicTest extends TestCase {
      * @covers \Comic::getYear
      * @covers \Comic::getStars
      * @covers \Comic::getWantList
-     * @covers \Comic::getHardCopy
+     * @covers \Comic::getHardCopy 
+     * @covers \Comic::getNotes
+     * @covers \Comic::getStory
      */
     public function testCheckSavedComicValues(int $id)
     {
@@ -94,17 +154,25 @@ class ComicTest extends TestCase {
         $comic = new Comic();
         $comic->loadComicById($pdo, $id);
         $this->assertEquals(2, $comic->getTitleId());
-        $this->assertEquals(228, $comic->getIssue());
+        $this->assertEquals(239, $comic->getIssue());
         $this->assertEquals(12, $comic->getMonth());
         $this->assertEquals(1979, $comic->getYear());
         $this->assertFalse($comic->getHardCopy());
         $this->assertTrue($comic->getWantList());
         $this->assertEquals(3, $comic->getStars());
+        $this->assertEquals("Notes go here", $comic->getNotes());
+        $this->assertEquals("Generic Story", $comic->getStory());
         
         // reset for another run
         $sql = 'DELETE FROM Comics WHERE Id = :Id';
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array($id));
+        $sql2 = 'DELETE FROM ArtBy WHERE ComicId = :Id';
+        $stmt2 = $pdo->prepare($sql2);
+        $stmt2->execute(array($id));
+        $sql3 = 'DELETE FROM ScriptBy  WHERE ComicId = :Id';
+        $stmt3 = $pdo->prepare($sql3);
+        $stmt3->execute(array($id));
     }
     
    
