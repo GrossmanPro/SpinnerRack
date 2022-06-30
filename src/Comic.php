@@ -13,8 +13,8 @@ class Comic {
     private $stars;
     private $hardCopy;
     private $wantList;
-    private $scripters;
-    private $artists;
+    public $scripters;
+    public $artists;
 
     public function __construct() {
         $this->id = 0;
@@ -199,7 +199,7 @@ class Comic {
             $this->artists[] = $artBy;
         }
     }
-
+    
     public function saveComic(object $pdo) {
         $params = array();
         $params[] = $this->titleId;
