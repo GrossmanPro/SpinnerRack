@@ -160,19 +160,10 @@ class ComicTest extends TestCase {
         $this->assertTrue($comic->getWantList());
         $this->assertEquals(3, $comic->getStars());
         $this->assertEquals("Notes go here", $comic->getNotes());
-        $this->assertEquals("Generic Story", $comic->getStory());
-        return $comic;
-        
-        // reset for another run
-//        $sql = 'DELETE FROM Comics WHERE Id = :Id';
-//        $stmt = $pdo->prepare($sql);
-//        $stmt->execute(array($id));
-//        $sql2 = 'DELETE FROM ArtBy WHERE ComicId = :Id';
-//        $stmt2 = $pdo->prepare($sql2);
-//        $stmt2->execute(array($id));
-//        $sql3 = 'DELETE FROM ScriptBy  WHERE ComicId = :Id';
-//        $stmt3 = $pdo->prepare($sql3);
-//        $stmt3->execute(array($id));
+        $this->assertEquals("Generic Story", $comic->getStory());     
+        $this->assertEquals(1, $comic->artists[0]->getId());
+        $this->assertEquals(1, $comic->scripters[0]->getId());        
+        return $comic; 
     }
     
     /**
@@ -199,6 +190,17 @@ class ComicTest extends TestCase {
         $this->assertEquals("Crisis On Infinite Jupiters", $updatedComic->getStory());
         // still the same value
         $this->assertEquals(1979, $updatedComic->getYear());  
+        
+        // reset for another run
+        $sql = 'DELETE FROM Comics WHERE Id = :Id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array($id));
+        $sql2 = 'DELETE FROM ArtBy WHERE ComicId = :Id';
+        $stmt2 = $pdo->prepare($sql2);
+        $stmt2->execute(array($id));
+        $sql3 = 'DELETE FROM ScriptBy  WHERE ComicId = :Id';
+        $stmt3 = $pdo->prepare($sql3);
+        $stmt3->execute(array($id));
     }
     
     
