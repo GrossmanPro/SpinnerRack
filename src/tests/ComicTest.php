@@ -23,8 +23,7 @@ class ComicTest extends TestCase {
     }
     
     /**
-     * @covers /Comic::setMonth
-     * @covers /Comic::getMonth
+     * @covers \Comic::setIssue
      */
     public function testSetIssueFail() {
         $comic = new Comic();
@@ -36,7 +35,7 @@ class ComicTest extends TestCase {
     }
     
     /**
-     * @covers /Comic::setIssue
+     * @covers \Comic::setMonth
      */
     public function testSetMonthFail() {
         $comic = new Comic();
@@ -48,8 +47,7 @@ class ComicTest extends TestCase {
     }
     
     /**
-     * @covers /Comic::setYear
-     * @covers /Comic::getYear
+     * @covers \Comic::setYear
      */
     public function testSetYearFail() {
         $comic = new Comic();
