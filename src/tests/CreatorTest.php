@@ -37,6 +37,7 @@ class CreatorTest extends TestCase {
     /**
      * @covers \Creator::getFullName
      * @covers \Creator::__construct
+     * @covers \Creator::getId
      */
     public function testGetFullNameSuccess() {
         global $pdo;
@@ -45,6 +46,7 @@ class CreatorTest extends TestCase {
         $creator->loadCreatorById($pdo, 5);
         $this->assertEquals("Jim Starlin", $creator->getFullName(false));
         $this->assertEquals("Starlin, Jim", $creator->getFullName(true));
+        $this->assertEquals(5, $creator->getId());
     }    
     
     /**
@@ -125,7 +127,7 @@ class CreatorTest extends TestCase {
         global $pdo;
         $creator = new Creator();
         $creator->setFirstName("Delete");
-        $creator->setLastName("Me041");
+        $creator->setLastName("Me00000");
         $id = $creator->saveCreator($pdo);
         $this->assertTrue(is_int($id));
         return $id;
