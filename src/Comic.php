@@ -138,7 +138,7 @@ class Comic {
         $stmt->execute(array($id));
         $comic = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (count($comic)) {
-            $this->id = $id;
+            $this->id = $comic[0]['Id'];
             $this->titleId = $comic[0]['TitleId'];
             $this->issue = $comic[0]['Issue'];
             $this->month = $comic[0]['Month'];
@@ -156,17 +156,17 @@ class Comic {
     }
     
     // may be called multiple times for books with more than one writer
-    public function saveScripter(object $pdo, int $creatorId) {
+    public function setScripter(object $pdo, int $creatorId) {
         if ($this->id) {
-        $sql = 'INSERT INTO ScriptBy (ComicId, CreatorId) VALUES (:ComicId, :CreatorId)';
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute(array($this->id, $creatorId));
+            $sql = 'INSERT INTO ScriptBy (ComicId, CreatorId) VALUES (:ComicId, :CreatorId)';
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(array($this->id, $creatorId));
         } else {
             throw new Exception ("Comic must be saved before assigning creators");
         }
     }
     
-    public function saveArtist(object $pdo, int $creatorId) {
+    public function setArtist(object $pdo, int $creatorId) {
         if ($this->id) {
             $sql = 'INSERT INTO ArtBy (ComicId, CreatorId) VALUES (:ComicId, :CreatorId)';
             $stmt = $pdo->prepare($sql);
@@ -211,7 +211,7 @@ class Comic {
         $params[] = $this->hardCopy;
         $params[] = $this->wantList;
         $params[] = $this->stars;
-        if ($this->id) {
+        if ($this->id) {        
             $sql = 'UPDATE Comics SET '
                     . 'TitleId = :TitleId, '
                     . 'Issue = :Issue, '
@@ -223,8 +223,10 @@ class Comic {
                     . 'WantList = :WantList , '
                     . 'Stars = :Stars '
                     . 'WHERE Id = :Id';
-            $params[] = $this->id;
-        } else {
+                $params[] = $this->id;
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute($params);
+        } else {            
             $sql = 'INSERT INTO Comics ('
                     . 'TitleId, '
                     . 'Issue, '
@@ -244,10 +246,10 @@ class Comic {
                     . ':HardCopy, '
                     . ':WantList, '
                     . ':Stars)';
-        }
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute($params);
-        $this->id = (int)$pdo->lastInsertId();
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute($params);
+            $this->id = (int)$pdo->lastInsertId();
+        }        
         return $this->id;  // don't really need to return this if it's in the object...
     }
 
