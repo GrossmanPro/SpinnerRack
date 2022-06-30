@@ -131,7 +131,6 @@ class ComicTest extends TestCase {
         $this->assertTrue(is_int($comic->getId()));   
         $comic->setArtist($pdo, 1);
         $comic->setScripter($pdo, 1);        
-        
         return $id;
     }
      
@@ -148,10 +147,10 @@ class ComicTest extends TestCase {
      * @covers \Comic::getNotes
      * @covers \Comic::getStory
      */
-    public function testCheckSavedComicValues(int $id)
+    public function testCheckSavedComicValues(int $id): Comic
     {
         global $pdo;    
-        $comic = new Comic();
+        $comic = new Comic();       
         $comic->loadComicById($pdo, $id);
         $this->assertEquals(2, $comic->getTitleId());
         $this->assertEquals(239, $comic->getIssue());
@@ -162,18 +161,47 @@ class ComicTest extends TestCase {
         $this->assertEquals(3, $comic->getStars());
         $this->assertEquals("Notes go here", $comic->getNotes());
         $this->assertEquals("Generic Story", $comic->getStory());
+        return $comic;
         
         // reset for another run
-        $sql = 'DELETE FROM Comics WHERE Id = :Id';
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute(array($id));
-        $sql2 = 'DELETE FROM ArtBy WHERE ComicId = :Id';
-        $stmt2 = $pdo->prepare($sql2);
-        $stmt2->execute(array($id));
-        $sql3 = 'DELETE FROM ScriptBy  WHERE ComicId = :Id';
-        $stmt3 = $pdo->prepare($sql3);
-        $stmt3->execute(array($id));
+//        $sql = 'DELETE FROM Comics WHERE Id = :Id';
+//        $stmt = $pdo->prepare($sql);
+//        $stmt->execute(array($id));
+//        $sql2 = 'DELETE FROM ArtBy WHERE ComicId = :Id';
+//        $stmt2 = $pdo->prepare($sql2);
+//        $stmt2->execute(array($id));
+//        $sql3 = 'DELETE FROM ScriptBy  WHERE ComicId = :Id';
+//        $stmt3 = $pdo->prepare($sql3);
+//        $stmt3->execute(array($id));
     }
+    
+    /**
+     * @depends testCheckSavedComicValues
+     * @covers \Comic::setStory
+     * @covers \Comic::setStars
+     * @covers \Comic::saveComic
+     * @covers \Comic::getId
+     * @covers \Comic::loadComicById
+     * @covers \Comic::getStars
+     */
+    function testUpdateComicValues(Comic $comic) {
+        global $pdo;  
+        $comic->setStory("Crisis On Infinite Jupiters");
+        $comic->setStars(1);
+        $comic->saveComic($pdo);
+        $id = $comic->getId();    
+        unset($comic);      
+        // reload and check new values 
+        $updatedComic = new Comic();
+        $updatedComic->loadComicById($pdo, $id);
+        // new values
+        $this->assertEquals(1, $updatedComic->getStars());
+        $this->assertEquals("Crisis On Infinite Jupiters", $updatedComic->getStory());
+        // still the same value
+        $this->assertEquals(1979, $updatedComic->getYear());  
+    }
+    
+    
     
    
     
