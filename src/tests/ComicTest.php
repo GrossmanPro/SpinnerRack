@@ -23,6 +23,31 @@ class ComicTest extends TestCase {
     }
     
     /**
+     * @covers /Comic::setIssue
+     */
+    public function testSetIssueFail() {
+        $comic = new Comic();
+        try {
+            $comic->setIssue(-9);
+        } catch (OutOfBoundsException $o) {
+            $this->assertEquals("This is not a valid issue number", $o->getMessage());            
+        }
+    }
+    
+    /**
+     * @covers \Comic::loadComicById
+     */
+    public function testLoadComicByIdFail() {
+        global $pdo;
+        $comic = new Comic();
+        try {
+            $comic->loadComicById($pdo, 999999);
+        } catch (Exception $e) {
+            $this->assertEquals("This comic does not exist", $e->getMessage());
+        }
+    }
+    
+    /**
      * @covers \Comic::__construct
      * @covers \Comic::saveComic
      * @covers \Comic::setTitleId
@@ -32,12 +57,14 @@ class ComicTest extends TestCase {
      * @covers \Comic::setStars
      * @covers \Comic::setHardCopy
      * @covers \Comic::setWantList
+     * @covers \Comic::setStory
+     * @covers \Comic::setNotes
      */
     public function testCreateNewComic(): int{
         global $pdo;
         $comic = new Comic();
         $comic->setTitleId(2); 
-        $comic->setIssue(218);
+        $comic->setIssue(228);
         $comic->setMonth(12);
         $comic->setYear(1979);
         $comic->setStars(3);
@@ -46,7 +73,7 @@ class ComicTest extends TestCase {
         $comic->setStory("Generic Story");
         $comic->setNotes("Notes go here");
         $id = $comic->saveComic($pdo);
-        $this->assertTrue(is_int($id));
+        $this->assertTrue(is_int($id));     
         return $id;
     }
      
@@ -58,16 +85,20 @@ class ComicTest extends TestCase {
      * @covers \Comic::getMonth
      * @covers \Comic::getYear
      * @covers \Comic::getStars
+     * @covers \Comic::getWantList
+     * @covers \Comic::getHardCopy
      */
     public function testCheckSavedComicValues(int $id)
     {
-        global $pdo;
+        global $pdo;    
         $comic = new Comic();
         $comic->loadComicById($pdo, $id);
         $this->assertEquals(2, $comic->getTitleId());
-        $this->assertEquals(218, $comic->getIssue());
+        $this->assertEquals(228, $comic->getIssue());
         $this->assertEquals(12, $comic->getMonth());
         $this->assertEquals(1979, $comic->getYear());
+        $this->assertFalse($comic->getHardCopy());
+        $this->assertTrue($comic->getWantList());
         $this->assertEquals(3, $comic->getStars());
         
         // reset for another run
