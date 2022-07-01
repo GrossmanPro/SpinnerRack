@@ -98,6 +98,19 @@ class ComicTest extends TestCase {
     }
     
     /**
+     * @covers \Comic::setStory
+     */
+    public function testSetStoryFail() {
+        $comic = new Comic();
+        $title = str_repeat("Story", 201);
+        try {
+            $comic->setStory($title);
+        } catch (Exception $e) {
+            $this->assertEquals("Story title too long--must be 1,000 characters or less", $e->getMessage());
+        }
+    }
+    
+    /**
      * @covers \Comic::__construct
      * @covers \Comic::saveComic
      * @covers \Comic::setTitleId
@@ -117,7 +130,7 @@ class ComicTest extends TestCase {
         global $pdo;
         $comic = new Comic();
         $comic->setTitleId(2); 
-        $comic->setIssue(239);
+        $comic->setIssue(242);
         $comic->setMonth(12);
         $comic->setYear(1979);
         $comic->setStars(3);
@@ -151,7 +164,7 @@ class ComicTest extends TestCase {
         $comic = new Comic();       
         $comic->loadComicById($pdo, $id);
         $this->assertEquals(2, $comic->getTitleId());
-        $this->assertEquals(239, $comic->getIssue());
+        $this->assertEquals(242, $comic->getIssue());
         $this->assertEquals(12, $comic->getMonth());
         $this->assertEquals(1979, $comic->getYear());
         $this->assertFalse($comic->getHardCopy());
