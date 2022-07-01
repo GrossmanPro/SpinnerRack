@@ -130,7 +130,7 @@ class ComicTest extends TestCase {
         global $pdo;
         $comic = new Comic();
         $comic->setTitleId(2); 
-        $comic->setIssue(242);
+        $comic->setIssue(246);
         $comic->setMonth(12);
         $comic->setYear(1979);
         $comic->setStars(3);
@@ -164,7 +164,7 @@ class ComicTest extends TestCase {
         $comic = new Comic();       
         $comic->loadComicById($pdo, $id);
         $this->assertEquals(2, $comic->getTitleId());
-        $this->assertEquals(242, $comic->getIssue());
+        $this->assertEquals(246, $comic->getIssue());
         $this->assertEquals(12, $comic->getMonth());
         $this->assertEquals(1979, $comic->getYear());
         $this->assertFalse($comic->getHardCopy());
@@ -206,12 +206,6 @@ class ComicTest extends TestCase {
         $sql = 'DELETE FROM Comics WHERE Id = :Id';
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array($id));
-        $sql2 = 'DELETE FROM ArtBy WHERE ComicId = :Id';
-        $stmt2 = $pdo->prepare($sql2);
-        $stmt2->execute(array($id));
-        $sql3 = 'DELETE FROM ScriptBy  WHERE ComicId = :Id';
-        $stmt3 = $pdo->prepare($sql3);
-        $stmt3->execute(array($id));
     }
     
     
