@@ -17,13 +17,13 @@ $titleOptions = getSelectListOptions($pdo, 'Titles', 'OptionText');
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Save Comic</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   </head>
   <body>
       <div class="container">
           <form id="comicInput" method="post" action="index.php">
-              <div class="row g-3">
+              <div class="row gx-3 gy-3">
                   <div class="form-floating col-md-6">
                       <select class="form-select" id="title" name="title" title="Comic title" autofocus>
                           <?php print $titleOptions; ?>
@@ -31,11 +31,9 @@ $titleOptions = getSelectListOptions($pdo, 'Titles', 'OptionText');
                       <label for="title">Title</label>
                   </div>
                   <div class="form-floating col-md-2">
-                      <input type="text" class="form-control" id="issue" name="issue" title="Issue number">
+                      <input type="text" class="form-control" id="issue" name="issue" title="Issue number" required>
                       <label for="issue">Issue No</label>
-                  </div>
-              
-              
+                  </div>  
                   <div class="form-floating col-md-2">
                       <select class="form-select" id="month" name="month" title="Month of publication">
                           <option value="1">JAN</option>
@@ -54,19 +52,29 @@ $titleOptions = getSelectListOptions($pdo, 'Titles', 'OptionText');
                       <label for="month">Cover month</label>
                   </div>
                   <div class="form-floating col-md-2">
-                      <input type="text" class="form-control" id="year" name="year" maxlength="4" min="1930" max="2100" title="Year of publication">
+                      <input type="text" class="form-control" id="year" name="year" maxlength="4" min="1930" max="2100" title="Year of publication" required>
                       <label for="year">Year</label>
                   </div>
               </div>
-              <div class="row">
+              <div class="row gy-3">
+                  <div class="form-floating col-md-6">
+                    <input type="text" class="form-control" id="story" name="story" title="Story" required>
+                    <label for="story">Story</label>
+                  </div>                  
+              </div>
+              <div class="row gy-3">
                   <div class="form-floating col-md-6">
                       <textarea class="form-control" rows="4" id="notes" name="notes" title="Story notes"></textarea>
                       <label for="notes">Notes</label>
                   </div>                      
               </div>
+              <div class="row">
+                  <input type="button" class="btn btn-primary" id="submitComic" value="Save Comic">
+              </div>
           </form>
       </div>
-
+    <script src="/js/jquery.js"></script>
+    <script src="/js/ComicFormView.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
   </body>
 </html>
