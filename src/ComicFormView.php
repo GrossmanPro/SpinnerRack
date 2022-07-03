@@ -10,6 +10,7 @@ require_once 'FormHelpers.php';
 
 
 $titleOptions = getSelectListOptions($pdo, 'Titles', 'OptionText');
+$creatorOptions = getSelectListOptions($pdo, 'Creators', 'OptionText');
 
 ?>
 <!doctype html>
@@ -22,8 +23,8 @@ $titleOptions = getSelectListOptions($pdo, 'Titles', 'OptionText');
   </head>
   <body>
       <div class="container">
-          <form id="comicInput" method="post" action="index.php">
-              <div class="row gx-3 gy-3">
+          <form id="comicInput" method="post" action="ComicFormController.php">
+              <div class="row">
                   <div class="form-floating col-md-6">
                       <select class="form-select" id="title" name="title" title="Comic title" autofocus>
                           <?php print $titleOptions; ?>
@@ -56,21 +57,35 @@ $titleOptions = getSelectListOptions($pdo, 'Titles', 'OptionText');
                       <label for="year">Year</label>
                   </div>
               </div>
-              <div class="row gy-3">
+              <div class="row">
                   <div class="form-floating col-md-6">
                     <input type="text" class="form-control" id="story" name="story" title="Story" required>
                     <label for="story">Story</label>
                   </div>                  
               </div>
-              <div class="row gy-3">
+              <div class="row">
                   <div class="form-floating col-md-6">
                       <textarea class="form-control" rows="4" id="notes" name="notes" title="Story notes"></textarea>
                       <label for="notes">Notes</label>
                   </div>                      
-              </div>
+              </div>    
               <div class="row">
-                  <input type="button" class="btn btn-primary" id="submitComic" value="Save Comic">
+                  <div class="form-floating col-md-4">
+                      <select class="form-select" id="scripters" name="scripters" title="Comic scripter or scripters">
+                          <?php print $creatorOptions; ?>
+                      </select>
+                      <label for="title">Writer(s)</label>
+                  </div>
+                  <div class="form-floating col-md-4">
+                      <select class="form-select" id="artists" name="artists" title="Comic artist or artists">
+                          <?php print $creatorOptions; ?>
+                      </select>
+                      <label for="title">Artist(s)</label>
+                  </div>
               </div>
+                <div class="row">
+                  <input type="button" class="btn btn-primary" id="submitComic" value="Save Comic">
+                </div>
           </form>
       </div>
     <script src="/js/jquery.js"></script>
