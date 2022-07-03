@@ -24,7 +24,7 @@ $creatorOptions = getSelectListOptions($pdo, 'Creators', 'OptionText');
   <body>
       <div class="container">
           <form id="comicInput" method="post" action="ComicFormController.php">
-              <div class="row">
+              <div class="row mb-3">
                   <div class="form-floating col-md-6">
                       <select class="form-select" id="title" name="title" title="Comic title" autofocus>
                           <?php print $titleOptions; ?>
@@ -57,19 +57,19 @@ $creatorOptions = getSelectListOptions($pdo, 'Creators', 'OptionText');
                       <label for="year">Year</label>
                   </div>
               </div>
-              <div class="row">
+              <div class="row mb-3">
                   <div class="form-floating col-md-6">
                     <input type="text" class="form-control" id="story" name="story" title="Story" required>
                     <label for="story">Story</label>
                   </div>                  
               </div>
-              <div class="row">
+              <div class="row mb-3">
                   <div class="form-floating col-md-6">
                       <textarea class="form-control" rows="4" id="notes" name="notes" title="Story notes"></textarea>
                       <label for="notes">Notes</label>
                   </div>                      
               </div>    
-              <div class="row">
+              <div class="row mb-3">
                   <div class="form-floating col-md-4">
                       <select class="form-select" id="scripters" name="scripters" title="Comic scripter or scripters">
                           <?php print $creatorOptions; ?>
