@@ -12,9 +12,10 @@ require_once 'FormHelpers.php';
 $titleOptions = getSelectListOptions($pdo, 'Titles', 'OptionText');
 $creatorOptions = getSelectListOptions($pdo, 'Creators', 'OptionText');
 
-print drawHeader('Save Comic');
+print drawHeader('Add New Comic');
 ?>
-<div class="container">
+<div class="container pt-4">
+    <p class="h4">Add New Comic</p>
     <form id="comicInput" method="post" action="ComicFormController.php">
         <div class="row mb-3">
             <div class="form-floating col-md-6">
@@ -72,24 +73,24 @@ print drawHeader('Save Comic');
             </div>                      
         </div>    
         <div class="row mb-3">
-            <div class="form-floating col-md-4">
+            <div class="form-floating col-md-3">
                 <select class="form-select" id="scripters" name="scripters" title="Comic scripter or scripters">
                     <?php print $creatorOptions; ?>
                 </select>
                 <label for="title">Writer(s)</label>
                 <div id="scripterList"></div>
             </div>
-            <div class="form-floating col-md-4">
+            <div class="form-floating col-md-3">
                 <select class="form-select" id="artists" name="artists" title="Comic artist or artists">
                     <?php print $creatorOptions; ?>
                 </select>
                 <label for="title">Artist(s)</label>
                 <div id="artistList"></div>
             </div>
+            <div class="col-md-1">
+                <input type="button" class="btn btn-primary" id="submitComic" value="Save Comic">
+            </div>
         </div>
-          <div class="row">
-            <input type="button" class="btn btn-primary" id="submitComic" value="Save Comic">
-          </div>
     </form>
 </div>
 <?php
