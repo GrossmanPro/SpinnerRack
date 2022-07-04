@@ -61,7 +61,17 @@ $creatorOptions = getSelectListOptions($pdo, 'Creators', 'OptionText');
                   <div class="form-floating col-md-6">
                     <input type="text" class="form-control" id="story" name="story" title="Story" required>
                     <label for="story">Story</label>
-                  </div>                  
+                  </div>              
+                  <div class="form-floating col-md-2">
+                      <select class="form-select" id="stars" name="stars" title="Comic rating">
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                      </select>
+                      <label for="stars">Rating</label>
+                  </div>
               </div>
               <div class="row mb-3">
                   <div class="form-floating col-md-6">
