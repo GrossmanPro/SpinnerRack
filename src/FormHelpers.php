@@ -9,7 +9,7 @@ function getSelectListOptions(object $pdo, string $table, string $orderBy): stri
     $sql = 'SELECT * FROM ' . $table . 'OptionTags ORDER BY ' . $orderBy;
     // remove trailing comma and get results  
     $results = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC); 
-    $options = '';
+    $options = '<option value="0">&nbsp;</option>';
     foreach ($results as $result) {
         $options .= '<option value="' . $result['OptionValue'] . '">' . $result['OptionText'] . '</option>';
     }
