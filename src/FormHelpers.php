@@ -2,9 +2,14 @@
 
 // load after DbConfig.php and DbConn.php
 
-
-
-
+/**
+ * Function getSelectListOptions
+ * Generates select list options from *OptionTags views in database.
+ * @param object $pdo
+ * @param string $table
+ * @param string $orderBy
+ * @return string
+ */
 function getSelectListOptions(object $pdo, string $table, string $orderBy): string {
     $sql = 'SELECT * FROM ' . $table . 'OptionTags ORDER BY ' . $orderBy;
     // remove trailing comma and get results  
