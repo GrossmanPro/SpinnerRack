@@ -1,4 +1,5 @@
 <?php
+
 require_once 'DbConfig.php';
 require_once 'DbConn.php';
 
@@ -6,7 +7,6 @@ require_once 'Publisher.php';
 require_once 'Title.php';
 require_once 'Creator.php';
 require_once 'Comic.php';
-
 
 extract($_POST); // filtered by Comic object methods
 
@@ -20,9 +20,9 @@ try {
     $comic->setNotes($notes);
     $comic->saveComic($pdo);
 
-    $scripters = array_unique(array_filter($_POST, function($key) {
-        return stripos($key, 'scripter_')!== false;
-    }, ARRAY_FILTER_USE_KEY));                           
+    $scripters = array_unique(array_filter($_POST, function ($key) {
+                return stripos($key, 'scripter_') !== false;
+            }, ARRAY_FILTER_USE_KEY));
 
     if (count($scripters)) {
         foreach ($scripters as $key => $val) {
@@ -30,9 +30,9 @@ try {
         }
     }
 
-    $artists = array_unique(array_filter($_POST, function($key) {
-        return stripos($key, 'artist_') !== false;
-    }, ARRAY_FILTER_USE_KEY));
+    $artists = array_unique(array_filter($_POST, function ($key) {
+                return stripos($key, 'artist_') !== false;
+            }, ARRAY_FILTER_USE_KEY));
 
     if (count($artists)) {
         foreach ($artists as $key => $val) {
@@ -45,8 +45,3 @@ try {
     header('Location: GeneralError.php');
 }
 print 'SAVED!';
-
-
-
-
-
