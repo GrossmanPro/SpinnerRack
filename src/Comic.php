@@ -89,7 +89,7 @@ class Comic {
 
     public function setStory(string $story) {
         if (strlen($story) <= 1000) {
-            $this->story = filter_var($story, FILTER_UNSAFE_RAW);
+            $this->story = htmlspecialchars(strip_tags(trim($story)));
         } else {
             throw new OutOfBoundsException("Story title too long--must be 1,000 characters or less");
         }
@@ -100,7 +100,7 @@ class Comic {
     }
 
     public function setNotes(string $notes) {
-        $this->notes = filter_var($notes, FILTER_UNSAFE_RAW);
+        $this->notes = htmlspecialchars(strip_tags(trim($notes)));
     }
 
     public function getStars(): int {
