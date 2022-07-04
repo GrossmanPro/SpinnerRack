@@ -24,6 +24,8 @@
         </include>
 	  <exclude>
 		<file>../index.php</file>
+		<file>../ComicFormView.php</file>
+		<file>../ComicFormController.php</file>
         </exclude>
     </coverage>
 </phpunit>
