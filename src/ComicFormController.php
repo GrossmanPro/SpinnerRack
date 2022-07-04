@@ -7,19 +7,8 @@ require_once 'Title.php';
 require_once 'Creator.php';
 require_once 'Comic.php';
 
-
-// print_r($_POST);
-// Array ( 
-// [title] => 134 
-// [issue] => 2 
-// [month] => 1 
-// [year] => 1970 
-// [story] => Story goes here 
-// [stars] => 1 
-// [notes] => Notes go here 
-// [scripters] => 43 
-// [artists] => 43 )
 extract($_POST); // filtered by Comic object methods
+
 $comic = new Comic();
 $comic->setTitleId($title);
 $comic->setIssue($issue);
@@ -28,8 +17,27 @@ $comic->setStars($stars);
 $comic->setStory($story);
 $comic->setNotes($notes);
 $comic->saveComic($pdo);
-$comic->setScripter($pdo, $artists);
-$comic->setArtist($pdo, $artists);
+
+$scripters = array_filter($_POST, function($key) {
+    return stripos($key, 'scripter_')!== false;
+}, ARRAY_FILTER_USE_KEY);
+
+if (count($scripters)) {
+    foreach ($scripters as $key => $val) {
+        $comic->setScripter($pdo, $val);
+    }
+}
+
+$artists = array_filter($_POST, function($key) {
+    return stripos($key, 'artist_') !== false;
+}, ARRAY_FILTER_USE_KEY);
+
+if (count($artists)) {
+    foreach ($artists as $key => $val) {
+        $comic->setArtist($pdo, $val);
+    }
+}
+
 print 'SAVED!';
 
 
