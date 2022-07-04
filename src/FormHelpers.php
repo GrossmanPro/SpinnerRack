@@ -43,7 +43,14 @@ function drawHeader(string $title, array $cssFiles = null): string {
         }
     }
     $header .= '</head>';
-    $header .= '<body>';
+    $header .= '<body>';   
+    $header .= '<nav class="navbar bg-light">';
+    $header .= '<div class="container">';
+    $header .= '<a class="navbar-brand" href="index.php">';
+    $header .= '<img src="/img/brand.svg" alt="Grossman Project-SpinnerRack" width="60" height="60">';
+    $header .= '</a>';
+    $header .= '</div>';
+    $header .= '</nav>';    
     return $header;
 }
 
