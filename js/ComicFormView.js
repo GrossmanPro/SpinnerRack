@@ -9,6 +9,10 @@ $(document).ready(function(){
         var artistName = $("#artists :selected").text();
         var artistId = $("#artists :selected").val();
         
+        if (artistId === "0") {
+            return;
+        } 
+        
         var html = '<div class="input-group" id="artistDiv_' + artistCount + '">';
         html += '<input type="text" class="form-control-plaintext" value="' + artistName + '" readonly>';
         html += '<input type="button" class="btn btn-danger removeCreator" value="Delete">';
@@ -22,6 +26,10 @@ $(document).ready(function(){
         scripterCount++;
         var scripterName = $("#scripters :selected").text();
         var scripterId = $("#scripters :selected").val();
+        
+        if (scripterId === "0") {
+            return;
+        }
         
         var html = '<div class="input-group" id="scripterDiv_' + scripterCount + '">';
         html += '<input type="text" class="form-control-plaintext" value="' + scripterName + '" readonly>';
