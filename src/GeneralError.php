@@ -1,9 +1,12 @@
 <?php
+require_once 'DbConfig.php';
+require_once 'DbConn.php';
+require_once 'FormHelpers.php';
 
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
- */
-
+print drawHeader('General Error');
 ?>
-print "ERROR!  This error has been logged.";
+
+<!--something goes here-->
+
+<?php
+print drawFooter();
