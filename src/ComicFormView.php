@@ -16,7 +16,7 @@ print drawHeader('Add New Comic');
 ?>
 <div class="container pt-4">
     <p class="h4">Add New Comic</p>
-    <form id="comicInput" method="post" action="ComicFormController.php">
+    <form id="comicInput" method="post" action="/added">
         <div class="row mb-3">
             <div class="form-floating col-md-6">
                 <select class="form-select" id="title" name="title" title="Comic title" autofocus>
