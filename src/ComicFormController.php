@@ -44,4 +44,5 @@ try {
     error_log($ex->getTraceAsString());
     header('Location: GeneralError.php');
 }
-print 'SAVED!';
+
+header("Location: /comics/" . $comic->getId() . "/view");
