@@ -5,6 +5,7 @@
 /**
  * Function getSelectListOptions
  * Generates select list options from *OptionTags views in database.
+ * $table and $orderBy are not user controlled, no SQL injection risk.
  * @param object $pdo
  * @param string $table
  * @param string $orderBy
