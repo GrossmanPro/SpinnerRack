@@ -161,6 +161,8 @@ class Comic {
             $sql = 'INSERT INTO ScriptBy (ComicId, CreatorId) VALUES (:ComicId, :CreatorId)';
             $stmt = $pdo->prepare($sql);
             $stmt->execute(array($this->id, $creatorId));
+            // reload
+            $this->loadScripters($pdo, $this->id);
         } else {
             throw new Exception ("Comic must be saved before assigning creators");
         }
@@ -171,12 +173,15 @@ class Comic {
             $sql = 'INSERT INTO ArtBy (ComicId, CreatorId) VALUES (:ComicId, :CreatorId)';
             $stmt = $pdo->prepare($sql);
             $stmt->execute(array($this->id, $creatorId));
+            // reload
+            $this->loadArtists($pdo, $this->id);
         } else {
             throw new Exception ("Comic must be saved before assigning creators");
         }        
     }
     
     private function loadScripters(object $pdo, int $comicId) {
+        $this->scripters = array();  // reset and reload
         $sql = 'SELECT CreatorId FROM ScriptBy WHERE ComicId = :ComicId';
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array($comicId));
@@ -188,7 +193,34 @@ class Comic {
         }
     }
     
+    /**
+     * function getScriptersToString
+     * Returns scripter names as comma-delimited string for screen display.
+     * @return string
+     */
+    public function getScriptersToString(): string {
+        $list = '';
+        foreach ($this->scripters as $scripter) {
+            $list .= $scripter->getFullName() . ', ';
+        }
+        return substr($list, 0, -2);
+    }
+    
+    /**
+     * function getArtistsToString
+     * Returns artist names as comma-delimited string for screen display.
+     * @return string
+     */
+    public function getArtistsToString(): string {
+        $list = '';
+        foreach ($this->artists as $artist) {
+            $list .= $artist->getFullName() . ', ';
+        }
+        return substr($list, 0, -2);
+    }
+    
     private function loadArtists(object $pdo, int $comicId) {
+        $this->artists = array();  // reset
         $sql = 'SELECT CreatorId FROM ArtBy WHERE ComicId = :ComicId';
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array($comicId));
@@ -199,6 +231,8 @@ class Comic {
             $this->artists[] = $artBy;
         }
     }
+    
+    
     
     public function saveComic(object $pdo) {
         $params = array();
