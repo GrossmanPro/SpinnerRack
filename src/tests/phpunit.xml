@@ -26,6 +26,9 @@
 		<file>../index.php</file>
 		<file>../ComicFormView.php</file>
 		<file>../ComicFormController.php</file>
+		<file>../ComicSaveView.php</file>
+		<file>../FormHelpers.php</file>
+		<file>../GeneralError.php</file>
         </exclude>
     </coverage>
 </phpunit>
