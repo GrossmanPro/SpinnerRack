@@ -56,6 +56,10 @@ print drawHeader('Comic Saved');
                 <td>Rating</td>
                 <td><?php print $comic->getStarSvgs(); ?></td>
             </tr>            
+            <tr>
+                <td>Notes</td>
+                <td><?php print $comic->getNotes(); ?></td>
+            </tr>
         </tbody>
     </table>
 </div>
