@@ -19,6 +19,9 @@ $publisher = new Publisher();
 $publisher->loadPublisherById($pdo, $title->getPublisherId());
 
 print drawHeader('Comic Saved');
+
+
+
 ?>
 <div class="container pt-4">
     <p class="h4">Comic Saved!</p>
@@ -33,6 +36,26 @@ print drawHeader('Comic Saved');
                 <td>Title</td>
                 <td><?php print $title->getName() . ' (' . $publisher->getPublisherName() . ')'; ?></td>
             </tr>
+            <tr>
+                <td>Issue</td>
+                <td><?php $comic->getIssue() . ' (' . $comic->getMonth() . '/' . $comic->getYear() . ')'; ?></td>
+            </tr>
+            <tr>
+                <td>Story</td>
+                <td><?php print $comic->getStory(); ?></td>
+            </tr>
+            <tr>
+                <td>Writer(s)</td>
+                <td><?php print $comic->getScriptersToString(); ?></td>
+            </tr>
+            <tr>
+                <td>Artist(s)</td>
+                <td><?php print $comic->getArtistsToString(); ?></td>
+            </tr>
+            <tr>
+                <td>Rating</td>
+                <td><?php print $comic->getStarSvgs(); ?></td>
+            </tr>            
         </tbody>
     </table>
 </div>
