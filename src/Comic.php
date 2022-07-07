@@ -106,6 +106,12 @@ class Comic {
     public function getStars(): int {
         return $this->stars;
     }
+    
+    public function getStarSvgs(): string {
+        $filled = str_repeat('<i class="bi bi-star-fill"></i>', $this->getStars());
+        $unfilled = str_repeat('<i class="bi bi-star"></i>', 5 - ($this->getStars()));
+        return $filled . $unfilled;
+    }
 
     public function setStars(int $stars) {
         $saveStars = filter_var($stars, FILTER_SANITIZE_NUMBER_INT);
