@@ -144,6 +144,38 @@ class ComicTest extends TestCase {
         $comic->setScripter($pdo, 1);        
         return $id;
     }
+    
+    /**
+     * @covers \Comic::__construct
+     * @covers \Comic::loadComicById
+     * @covers \Comic::getScriptersToString
+     * @covers \Comic::getArtistsToString
+     */
+    public function testGetArtistAndWriterByString() {
+        global $pdo;
+        $comic = new Comic();
+        $comic->setTitleId(2); 
+        $comic->setIssue(1000);
+        $comic->setMonth(12);
+        $comic->setYear(1979);
+        $comic->setStars(3);
+        $comic->setHardCopy(false);
+        $comic->setWantList(true);
+        $comic->setStory("Generic Storyx");
+        $comic->setNotes("Notes go here");
+        $id = $comic->saveComic($pdo);
+        $this->assertTrue(is_int($comic->getId()));   
+        $comic->setArtist($pdo, 1);     
+        $comic->setScripter($pdo, 1);
+        $this->assertEquals("John Byrne", $comic->getScriptersToString());
+        $this->assertEquals("John Byrne", $comic->getArtistsToString());
+        
+        // reset for another run
+        $sql = 'DELETE FROM Comics WHERE Id = :Id';
+        $stmt = $pdo->prepare($sql);
+        //$stmt->execute(array($id));
+        
+    }
      
     /**
      * @depends testCreateNewComic
