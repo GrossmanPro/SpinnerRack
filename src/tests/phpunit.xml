@@ -30,6 +30,7 @@
 		<file>../FormHelpers.php</file>
 		<file>../GeneralError.php</file>
 		<file>../AntiCsrf.php</file>
+		<file>../Setup.php</file>
         </exclude>
     </coverage>
 </phpunit>
