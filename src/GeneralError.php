@@ -1,7 +1,5 @@
 <?php
-require_once 'DbConfig.php';
-require_once 'DbConn.php';
-require_once 'FormHelpers.php';
+require_once 'Setup.php';
 
 print drawHeader('General Error');
 ?>

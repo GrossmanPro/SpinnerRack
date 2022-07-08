@@ -1,12 +1,5 @@
 <?php
-require_once 'DbConfig.php';
-require_once 'DbConn.php';
-
-require_once 'Publisher.php';
-require_once 'Title.php';
-require_once 'Creator.php';
-require_once 'Comic.php';
-require_once 'FormHelpers.php';
+require_once 'Setup.php';
 
 $comicId = filter_input(INPUT_GET, 'comicId', FILTER_SANITIZE_NUMBER_INT);
 $comic = new Comic();
@@ -19,8 +12,6 @@ $publisher = new Publisher();
 $publisher->loadPublisherById($pdo, $title->getPublisherId());
 
 print drawHeader('Comic Saved');
-
-
 
 ?>
 <div class="container pt-4">
