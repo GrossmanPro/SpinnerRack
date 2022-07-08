@@ -29,6 +29,7 @@
 		<file>../ComicSaveView.php</file>
 		<file>../FormHelpers.php</file>
 		<file>../GeneralError.php</file>
+		<file>../AntiCsrf.php</file>
         </exclude>
     </coverage>
 </phpunit>
