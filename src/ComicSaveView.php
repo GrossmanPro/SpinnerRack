@@ -52,7 +52,8 @@ print drawHeader('Comic Saved');
                 <td><?php print $comic->getNotes(); ?></td>
             </tr>
         </tbody>
-    </table>
+    </table>    
+    <a class="btn btn-primary" href="/comics/add">Add another comic?</a>
 </div>
 <?php
 print drawFooter();
