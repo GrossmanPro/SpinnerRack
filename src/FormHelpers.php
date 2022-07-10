@@ -43,7 +43,7 @@ function drawHeader(string $title, array $cssFiles = null): string {
     $header .= '<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">';
     if (!is_null($cssFiles)) {
         foreach ($cssFiles as $file) {
-            $header .= '<link src="" rel="stylesheet">';
+            $header .= '<link src="/css/' . $file . '" rel="stylesheet">';
         }
     }
     $header .= '</head>';
