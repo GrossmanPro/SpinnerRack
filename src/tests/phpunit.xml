@@ -31,6 +31,7 @@
 		<file>../GeneralError.php</file>
 		<file>../AntiCsrf.php</file>
 		<file>../Setup.php</file>
+                <file>../AdminCreator.php</file>
         </exclude>
     </coverage>
 </phpunit>
