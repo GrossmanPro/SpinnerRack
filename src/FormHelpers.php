@@ -39,7 +39,8 @@ function drawHeader(string $title, array $cssFiles = null): string {
     $header .= '<title>' . $title . '</title>';
     $header .= '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">';
     $header .= '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">';
-    $header .= '<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">';
+    $header .= '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">';
+    $header .= '<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">';
     if (!is_null($cssFiles)) {
         foreach ($cssFiles as $file) {
             $header .= '<link src="" rel="stylesheet">';
@@ -68,6 +69,7 @@ function drawFooter(array $jsFiles = null): string {
     $footer = '<script src="/js/jquery.js"></script>';
     $footer .= '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>';
     $footer .= '<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>';
+    $footer .= '<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>';
     if (!is_null($jsFiles)) {
         foreach ($jsFiles as $file) {
             $footer .= '<script src="/js/' . $file . '"></script>';
