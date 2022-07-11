@@ -70,5 +70,37 @@ class Creator {
         }
         return (int)$this->id;
     }
+    
+    /**
+     * Function getCreatorTable
+     * Static function to create a table of creator records for 
+     * jQuery DataTable.  Placed here to keep methods related to
+     * Creators table together.
+     * @param object $pdo
+     * @return string
+     */
+    public static function getCreatorTable(object $pdo): string {
+        $table = '<table id="adminCreatorsTable" class="table table-sm table-bordered">';
+        $table .= '<thead>';
+        $table .= '<tr>';
+        $table .= '<th class="actionColumn text-center">Actions</th>';
+        $table .= '<th>Last Name</th>';
+        $table .= '<th>First Name</th>';
+        $table .= '</tr>';
+        $table .= '</thead>';
+        $table .= '<tbody>';
+        foreach ($pdo->query('SELECT * FROM Creators ORDER BY LastName, FirstName') as $creator) {
+            $editBtn = '<input type="button" class="btn btn-sm btn-info" id="btnEdit_X" value="Save">';
+            $deleteBtn = '<input type="button" class="btn btn-sm btn-danger" id="btnDelete_X" value="Delete">';
+            $table .= '<tr>';
+            $table .= '<td class="text-center">' . $editBtn . '&nbsp;' . $deleteBtn . '</td>';
+            $table .= '<td>' . $creator['LastName'] . '</td>';
+            $table .= '<td>' . $creator['FirstName'] . '</td>';
+            $table .= '</tr>';
+        }
+        $table .= '</tbody>';
+        $table .= '</table>';
+        return $table;
+    }
 
 }
