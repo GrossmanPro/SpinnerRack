@@ -32,6 +32,7 @@
 		<file>../AntiCsrf.php</file>
 		<file>../Setup.php</file>
                 <file>../AdminCreator.php</file>
+                <file>../AdminCreatorController.php</file>
         </exclude>
     </coverage>
 </phpunit>
