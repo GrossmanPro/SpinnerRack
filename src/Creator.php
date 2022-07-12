@@ -90,8 +90,8 @@ class Creator {
         $table .= '</thead>';
         $table .= '<tbody>';
         foreach ($pdo->query('SELECT * FROM Creators ORDER BY LastName, FirstName') as $creator) {
-            $editBtn = '<input type="button" class="btn btn-sm btn-info" id="btnEdit_X" value="Save">';
-            $deleteBtn = '<input type="button" class="btn btn-sm btn-danger" id="btnDelete_X" value="Delete">';
+            $editBtn = '<input type="button" class="btn btn-sm btn-info" id="btnEdit_' . $creator['Id'] . '" value="Save">';
+            $deleteBtn = '<input type="button" class="btn btn-sm btn-danger" id="btnDelete_' . $creator['Id'] . '" value="Delete">';
             $table .= '<tr>';
             $table .= '<td class="text-center">' . $editBtn . '&nbsp;' . $deleteBtn . '</td>';
             $table .= '<td>' . $creator['LastName'] . '</td>';
