@@ -2,6 +2,13 @@
 
 require_once 'Setup.php';
 
+// test for csrf
+if (requestIsPost() && !csrfTokenIsValid()) {
+    error_log('Bad CSRF token in ComicFormController.php');
+    header('Location: GeneralError.php');
+    exit;    
+} 
+
 extract($_POST); // filtered by Comic object methods
 
 try {
