@@ -21,7 +21,7 @@ try {
         $creator->setLastName($lastName);
         $creator->saveCreator($pdo);        
     }
-    header('Location: /admin/creators/');
+    header('Location: /admin/creators/ok');
 } catch (Exception $e) {
     header('Location: GeneralError.php');
 }

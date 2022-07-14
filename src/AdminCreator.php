@@ -2,10 +2,6 @@
 require_once 'Setup.php';
 print drawHeader('Admin: Creators');  
 
-if (array_key_exists('status', $_GET)) {
-    // show save ok message
-}
-
 $addForm = <<<EOD
 <div class="container pt-4">
 <p class="h4">Admin: Creators</p>
@@ -30,6 +26,12 @@ $tokenTag
         <input type="hidden" id="deleteId" name="deleteId" value="0">
 </form>
 EOD;
+
+if (array_key_exists('status', $_GET)) {
+    if ($_GET['status']== 'ok') {
+        print '<div class="alert alert-success text-center"><strong>Creator record changed</strong></div>';
+    }
+}
 
 print $addForm;
 print Creator::getCreatorTable($pdo);
