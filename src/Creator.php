@@ -91,7 +91,7 @@ class Creator {
         $table .= '<tbody>';
         foreach ($pdo->query('SELECT * FROM Creators ORDER BY LastName, FirstName') as $creator) {
             $editBtn = '<input type="button" class="btn btn-sm btn-info" id="btnEdit_' . $creator['Id'] . '" value="Save">';
-            $deleteBtn = '<input type="button" class="btn btn-sm btn-danger" id="btnDelete_' . $creator['Id'] . '" value="Delete">';
+            $deleteBtn = '<input type="button" class="btn btn-sm btn-danger deleteCreator" id="btnDelete_' . $creator['Id'] . '" value="Delete">';
             $table .= '<tr>';
             $table .= '<td class="text-center">' . $editBtn . '&nbsp;' . $deleteBtn . '</td>';
             $table .= '<td>' . $creator['LastName'] . '</td>';
@@ -101,6 +101,18 @@ class Creator {
         $table .= '</tbody>';
         $table .= '</table>';
         return $table;
+    }
+    
+    /**
+     * Function deleteCreator
+     * @param object $pdo
+     * @param int $creatorId
+     * @return void
+     */
+    public static function deleteCreator(object $pdo, int $creatorId): void {
+        $sql = 'DELETE FROM Creators WHERE Id = :Id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array($creatorId));
     }
 
 }

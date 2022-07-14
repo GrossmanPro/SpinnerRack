@@ -8,15 +8,19 @@ if (requestIsPost() && !csrfTokenIsValid()) {
     exit;    
 } 
 
-
 $firstName = filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $lastName = filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
 try {
-    $creator = new Creator();
-    $creator->setFirstName($firstName);
-    $creator->setLastName($lastName);
-    $creator->saveCreator($pdo);
+    if (array_key_exists('deleteId', $_POST)) {
+        $creatorId = filter_input(INPUT_POST, 'deleteId', FILTER_SANITIZE_NUMBER_INT);
+        Creator::deleteCreator($pdo, $creatorId);
+    } else {
+        $creator = new Creator();
+        $creator->setFirstName($firstName);
+        $creator->setLastName($lastName);
+        $creator->saveCreator($pdo);        
+    }
     header('Location: /admin/creators/');
 } catch (Exception $e) {
     header('Location: GeneralError.php');

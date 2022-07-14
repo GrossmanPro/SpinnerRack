@@ -9,7 +9,7 @@ if (array_key_exists('status', $_GET)) {
 $addForm = <<<EOD
 <div class="container pt-4">
 <p class="h4">Admin: Creators</p>
-<form id="comicInput" method="post" action="/admin/save">
+<form id="creatorInput" method="post" action="/admin/save">
 $tokenTag
 <div class="row mb-3 align-items-center">
 <div class="form-floating col-md-4">
@@ -24,6 +24,10 @@ $tokenTag
     <input type="submit" class="btn btn-primary" value="Add" title="Add creator">
 </div>
 </div>
+</form>
+<form id="creatorDelete" method="post" action="/admin/save">
+        $tokenTag
+        <input type="hidden" id="deleteId" name="deleteId" value="0">
 </form>
 EOD;
 
