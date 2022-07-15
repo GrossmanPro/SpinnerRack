@@ -60,7 +60,7 @@ class Publisher {
         $table .= '</tr>';
         $table .= '</thead>';
         $table .= '<tbody>';
-        foreach ($pdo->query('SELECT * FROM Publishers ORDER BY LastName, FirstName') as $pub) {
+        foreach ($pdo->query('SELECT * FROM Publishers ORDER BY Publisher') as $pub) {
             $editBtn = '<input type="button" class="btn btn-sm btn-info" id="btnEdit_' . $pub['Id'] . '" value="Save">';
             $deleteBtn = '<input type="button" class="btn btn-sm btn-danger deleteCreator" id="btnDelete_' . $pub['Id'] . '" value="Delete">';
             $table .= '<tr>';
@@ -71,6 +71,12 @@ class Publisher {
         $table .= '</tbody>';
         $table .= '</table>';
         return $table;
+    }
+    
+    public static function deletePublisher(object $pdo, int $publisherId): void {
+        $sql = 'DELETE FROM Publishers WHERE Id = :Id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array($publisherId));
     }
     
 }
