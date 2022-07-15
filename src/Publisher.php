@@ -51,5 +51,27 @@ class Publisher {
         return $this->id;  
     }
     
+    public static function getPublisherTable(object $pdo): string {
+        $table = '<table id="adminPublishersTable" class="table table-sm table-bordered">';
+        $table .= '<thead>';
+        $table .= '<tr>';
+        $table .= '<th class="actionColumn text-center">Actions</th>';
+        $table .= '<th>Publisher Name</th>';
+        $table .= '</tr>';
+        $table .= '</thead>';
+        $table .= '<tbody>';
+        foreach ($pdo->query('SELECT * FROM Publishers ORDER BY LastName, FirstName') as $pub) {
+            $editBtn = '<input type="button" class="btn btn-sm btn-info" id="btnEdit_' . $pub['Id'] . '" value="Save">';
+            $deleteBtn = '<input type="button" class="btn btn-sm btn-danger deleteCreator" id="btnDelete_' . $pub['Id'] . '" value="Delete">';
+            $table .= '<tr>';
+            $table .= '<td class="text-center">' . $editBtn . '&nbsp;' . $deleteBtn . '</td>';
+            $table .= '<td>' . $pub['Publisher'] . '</td>';
+            $table .= '</tr>';
+        }
+        $table .= '</tbody>';
+        $table .= '</table>';
+        return $table;
+    }
+    
 }
 
