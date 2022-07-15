@@ -5,7 +5,7 @@ print drawHeader('Admin: Creators');
 $addForm = <<<EOD
 <div class="container pt-4">
 <p class="h4">Admin: Creators</p>
-<form id="creatorInput" method="post" action="/admin/save">
+<form id="creatorInput" method="post" action="/admin/creators/save">
 $tokenTag
 <div class="row mb-3 align-items-center">
 <div class="form-floating col-md-4">
@@ -21,7 +21,7 @@ $tokenTag
 </div>
 </div>
 </form>
-<form id="creatorDelete" method="post" action="/admin/save">
+<form id="creatorDelete" method="post" action="/admin/creators/save">
         $tokenTag
         <input type="hidden" id="deleteId" name="deleteId" value="0">
 </form>
