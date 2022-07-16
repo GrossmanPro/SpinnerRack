@@ -32,4 +32,4 @@ if (array_key_exists('status', $_GET)) {
 print $addForm;
 print Publisher::getPublisherTable($pdo);
 print '</div>';
-print drawFooter(array('PublisherCreator.js'));
+print drawFooter(array('AdminPublisher.js'));
