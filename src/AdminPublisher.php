@@ -9,7 +9,7 @@ $addForm = <<< eod
 $tokenTag
 <div class="row mb-3 align-items-center">
 <div class="form-floating col-md-4">
-    <input type="text" class="form-control" id="publisherName" name="publishertName" title="Publisher name" required>
+    <input type="text" class="form-control" id="publisherName" name="publisherName" title="Publisher name" required>
     <label for="firstName">Publisher Name</label>
 </div>  
 <div class="col-md-1">
