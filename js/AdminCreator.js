@@ -10,4 +10,9 @@ $(document).ready( function () {
         }
     });
     
+    $(".editCreator").click(function() {
+        var creatorId = this.id.split("_");
+        alert(creatorId[1]);
+    });
+    
 });

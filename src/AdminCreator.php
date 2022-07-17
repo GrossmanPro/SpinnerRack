@@ -25,6 +25,10 @@ $tokenTag
         $tokenTag
         <input type="hidden" id="deleteId" name="deleteId" value="0">
 </form>
+<form id="editorDelete" method="post' action="/admin/creators/save">
+    $tokenTag
+    <input type="hidden" id="editId" name="editId" value="0">
+</form>
 EOD;
 
 if (array_key_exists('status', $_GET)) {
