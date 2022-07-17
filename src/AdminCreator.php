@@ -17,7 +17,7 @@ $tokenTag
     <label for="lasttName">Last Name</label>
 </div>  
 <div class="col-md-1">
-    <input type="submit" class="btn btn-primary" value="Add" title="Add creator">
+    <input type="submit" class="btn btn-primary" value="Save" title="Save creator">
 </div>
 </div>
 </form>
