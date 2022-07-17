@@ -55,7 +55,7 @@ class Publisher {
         $table = '<table id="adminPublishersTable" class="table table-sm table-bordered">';
         $table .= '<thead>';
         $table .= '<tr>';
-        $table .= '<th class="actionColumn text-center">Actions</th>';
+        $table .= '<th class="actionColumn text-center" data-orderable="false">Actions</th>';
         $table .= '<th>Publisher Name</th>';
         $table .= '</tr>';
         $table .= '</thead>';
