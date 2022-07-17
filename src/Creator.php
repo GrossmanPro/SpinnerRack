@@ -83,7 +83,7 @@ class Creator {
         $table = '<table id="adminCreatorsTable" class="table table-sm table-bordered">';
         $table .= '<thead>';
         $table .= '<tr>';
-        $table .= '<th class="actionColumn text-center">Actions</th>';
+        $table .= '<th class="actionColumn text-center" data-orderable="false">Actions</th>';
         $table .= '<th>Last Name</th>';
         $table .= '<th>First Name</th>';
         $table .= '</tr>';
