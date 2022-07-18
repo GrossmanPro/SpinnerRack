@@ -8,11 +8,5 @@ $(document).ready( function () {
             $("#deleteId").val(creatorId[1]);
             $("#creatorDelete").submit();
         }
-    });
-    
-    $(".editCreator").click(function() {
-        var creatorId = this.id.split("_");
-        alert(creatorId[1]);
-    });
-    
+    });    
 });
