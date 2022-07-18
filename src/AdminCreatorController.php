@@ -16,7 +16,12 @@ try {
         $creatorId = filter_input(INPUT_POST, 'deleteId', FILTER_SANITIZE_NUMBER_INT);
         Creator::deleteCreator($pdo, $creatorId);
     } else if (array_key_exists('editId', $_POST)) {
-        // send to edit page view, that view will post back here?  new controller?
+        $creatorId = filter_input(INPUT_POST, 'editId', FILTER_SANITIZE_NUMBER_INT);
+        $creator = new Creator();
+        $creator->loadCreatorById($pdo, $creatorId);
+        $creator->setFirstName($firstName);
+        $creator->setLastName($lastName);
+        $creator->saveCreator($pdo);
     } else {
         $creator = new Creator();
         $creator->setFirstName($firstName);
