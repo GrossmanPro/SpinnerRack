@@ -5,7 +5,7 @@ print drawHeader('Admin: Publishers');
 
 $publisherId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 $pub = new Publisher();
-$pub->loadPublisherById($pdo, $pubisherId);
+$pub->loadPublisherById($pdo, $publisherId);
 $pubName = $pub->getPublisherName();
 
 $editForm = <<< eod
