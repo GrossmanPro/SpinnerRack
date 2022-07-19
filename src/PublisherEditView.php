@@ -20,7 +20,7 @@ $tokenTag
     <label for="publisherName">Publisher Name</label>
 </div>  
 <div class="col-md-1">
-    <input type="submit" class="btn btn-primary" value="Add" title="Add publisher">
+    <input type="submit" class="btn btn-primary" value="Save" title="Add publisher">
 </div>
 </div>
 </form>
