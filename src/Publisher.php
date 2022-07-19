@@ -61,7 +61,7 @@ class Publisher {
         $table .= '</thead>';
         $table .= '<tbody>';
         foreach ($pdo->query('SELECT * FROM Publishers ORDER BY Publisher') as $pub) {
-            $editBtn = '<input type="button" class="btn btn-sm btn-info" id="btnEdit_' . $pub['Id'] . '" value="Save">';
+            $editBtn = '<a href="/admin/publishers/edit/' . $pub['Id'] . '/" class="btn btn-sm btn-info" id="btnEdit_' . $pub['Id'] . '" value="Edit">';
             $deleteBtn = '<input type="button" class="btn btn-sm btn-danger deletePublisher" id="btnDelete_' . $pub['Id'] . '" value="Delete">';
             $table .= '<tr>';
             $table .= '<td class="text-center">' . $editBtn . '&nbsp;' . $deleteBtn . '</td>';
