@@ -10,7 +10,7 @@ $creator->loadCreatorById($pdo, $creatorId);
 $firstName = $creator->getFirstName();
 $lastName = $creator->getLastName(); 
 
-$addForm = <<<EOD
+$editForm = <<<EOD
 <div class="container pt-4">
 <p class="h4">Admin: Creators</p>
 <form id="creatorInput" method="post" action="/admin/creators/save">
@@ -32,6 +32,6 @@ $tokenTag
 </form>
 EOD;
 
-print $addForm;
+print $editForm;
 
 print drawFooter();
