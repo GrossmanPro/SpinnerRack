@@ -17,7 +17,7 @@ $tokenTag
 <div class="row mb-3 align-items-center">
 <div class="form-floating col-md-4">
     <input type="text" class="form-control" id="publisherName" name="publisherName" title="Publisher name" value="$pubName" required>
-    <label for="firstName">Publisher Name</label>
+    <label for="publisherName">Publisher Name</label>
 </div>  
 <div class="col-md-1">
     <input type="submit" class="btn btn-primary" value="Add" title="Add publisher">
@@ -27,5 +27,4 @@ $tokenTag
 eod;
 
 print $editForm;
-
 print drawFooter();
