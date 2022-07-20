@@ -2,9 +2,14 @@
 
 require_once 'Setup.php';
 print drawHeader('Admin: Titles');  
-
+print '<div class="container pt-4">';
+    
+if (array_key_exists('status', $_GET)) {
+    if ($_GET['status']== 'ok') {
+        print '<div class="alert alert-success text-center"><strong>Title record changed</strong></div>';
+    }
+}    
 ?>
-<div class="container pt-4">
     <p class="h4">Admin: Titles</p>
     <form id="titleInput" method="post" action="/admin/titles/save"> 
         <?php print $tokenTag; ?>
@@ -40,8 +45,7 @@ print drawHeader('Admin: Titles');
         <?php print $tokenTag; ?>
         <input type="hidden" id="deleteId" name="deleteId" value="0">
     </form>
-</div>
-
-
 <?php
-print drawFooter();
+print Title::getTitlesTable($pdo);
+print '</div>';
+print drawFooter(array('AdminTitle.js'));
