@@ -62,6 +62,7 @@ function drawHeader(string $title, array $cssFiles = null): string {
     $header .= '<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">';
     $header .= '<li><a class="dropdown-item" href="/admin/creators">Creators</a></li>';
     $header .= '<li><a class="dropdown-item" href="/admin/publishers">Publishers</a></li>';
+    $header .= '<li><a class="dropdown-item" href="/admin/titles">Titles</a></li>';
     $header .= '</ul>';
     $header .= '</ul>';
     $header .= '</li>';
