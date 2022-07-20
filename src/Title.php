@@ -103,4 +103,53 @@ class Title {
         return $this->id;
     }    
     
+    /**
+     * getTitlesTable
+     * 
+     * Generates HTML for table of comic titles w/edit and delete controls
+     * 
+     * @param object $pdo
+     * @return string
+     */
+    public static function getTitlesTable(object $pdo): string {
+        $table = '<table id="adminTitlesTable" class="table table-sm table-bordered">';
+        $table .= '<thead>';
+        $table .= '<tr>';
+        $table .= '<th class="actionColumn text-center" data-orderable="false">Actions</th>';
+        $table .= '<th>Title</th>';
+        $table .= '<th>Publisher</th>';
+        $table .= '<th>Year</th>';
+        $table .= '<th>Volume</th>';
+        $table .= '</tr>';
+        $table .= '</thead>';
+        $table .= '<tbody>';
+        foreach ($pdo->query('SELECT * FROM TitlesView ORDER BY [Name]') as $title) {
+            $editBtn = '<a href="/admin/titles/edit/' . $title['Id'] . '/" class="btn btn-sm btn-info" id="btnEdit_' . $title['Id'] . '">Edit</a>';
+            $deleteBtn = '<input type="button" class="btn btn-sm btn-danger deleteTitle" id="btnDelete_' . $title['Id'] . '" value="Delete">';
+            $table .= '<tr>';
+            $table .= '<td class="text-center">' . $editBtn . '&nbsp;' . $deleteBtn . '</td>';
+            $table .= '<td>' . $title['Name'] . '</td>';
+            $table .= '<td>' . $title['Publisher']. '</td>';
+            $table .= '<td>' . $title['StartYear']. '</td>';
+            $table .= '<td>' . $title['Volume'] . '</td>';
+            $table .= '</tr>';
+        }
+        $table .= '</tbody>';
+        $table .= '</table>';
+        return $table;
+    }
+    
+    /**
+     * deleteTitle
+     * 
+     * @param object $pdo
+     * @param int $titleId  Title.Id (primary key)
+     * @return void
+     */
+    public static function deleteTitle(object $pdo, int $titleId): void {
+        $sql = 'DELETE FROM Titles WHERE Id = :Id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array($titleId));
+    }
+    
 }
