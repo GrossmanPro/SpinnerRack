@@ -5,12 +5,14 @@ print drawHeader('Admin: Titles');
 print '<div class="container pt-4">';
     
 if (array_key_exists('status', $_GET)) {
-    if ($_GET['status']== 'ok') {
-        print '<div class="alert alert-success text-center"><strong>Title record changed</strong></div>';
+    if ($_GET['status'] == 'ok') {
+        $action = 'changed';
     }
+    
     if ($_GET['status'] == 'okNew') {
-        print '<div class="alert alert-success text-center"><strong>Title record added</strong></div>';        
+        $action = 'added';    
     }
+    print '<div class="alert alert-success text-center"><strong>Title record ' . $action . '</strong></div>';
 }    
 ?>
     <p class="h4">Admin: Titles</p>
