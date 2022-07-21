@@ -5,13 +5,7 @@ print drawHeader('Admin: Titles');
 print '<div class="container pt-4">';
     
 if (array_key_exists('status', $_GET)) {
-    if ($_GET['status'] == 'ok') {
-        $action = 'changed';
-    }
-    
-    if ($_GET['status'] == 'okNew') {
-        $action = 'added';    
-    }
+    $action = FILTER_INPUT(INPUT_GET, 'status', FILTER_SANITIZE_SPECIAL_CHARS);
     print '<div class="alert alert-success text-center"><strong>Title record ' . $action . '</strong></div>';
 }    
 ?>

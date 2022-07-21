@@ -14,7 +14,8 @@ extract($_POST);
 try {
     if (array_key_exists('deleteId', $_POST)) {
         $titleId = filter_input(INPUT_POST, 'deleteId', FILTER_SANITIZE_NUMBER_INT);
-        Title::deleteTitle($pdo, $titleId);
+        Title::deleteTitle($pdo, $titleId);  
+        header('Location: /admin/titles/deleted');
     } else if (array_key_exists('editId', $_POST)) {
         $titleId = filter_input(INPUT_POST, 'editId', FILTER_SANITIZE_NUMBER_INT);
         $title = new Title();
@@ -24,7 +25,7 @@ try {
         $title->setStartYear($comicYear);
         $title->setVolume($comicVolume);
         $title->saveTitle($pdo);     
-        header('Location: /admin/titles/ok');
+        header('Location: /admin/titles/saved');
     } else {
         $title = new Title();
         $title->setName($comicTitle);
@@ -32,7 +33,7 @@ try {
         $title->setStartYear($comicYear);
         $title->setVolume($comicVolume);
         $title->saveTitle($pdo);        
-        header('Location: /admin/titles/okNew');
+        header('Location: /admin/titles/added');
     }
     
 } catch (Exception $e) {
