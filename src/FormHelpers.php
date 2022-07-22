@@ -17,8 +17,8 @@ function getSelectListOptions(object $pdo, string $table, string $orderBy, int $
     // remove trailing comma and get results  
     $results = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC); 
     $options = '<option value="0">&nbsp;</option>';
-    foreach ($results as $result) {
-        $selectAttr = ($result['OptionValue'] === $selected)? ' selected ': '';
+    foreach ($results as $result) {error_log($result['OptionValue'] . ' ' . $selected);
+        $selectAttr = ((int)$result['OptionValue'] === $selected)? ' selected ': '';
         $options .= '<option value="' 
                 . $result['OptionValue'] . '"' 
                 . $selectAttr .'>' 
