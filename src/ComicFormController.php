@@ -19,8 +19,15 @@ try {
     $comic->setStars($stars);
     $comic->setStory($story);
     $comic->setNotes($notes);
+    
+    if (array_key_exists('wantList', $_POST)) {
+        $comic->setWantList(true);
+    } else {
+        $comic->setWantList(false);
+    }
+    
     $comic->saveComic($pdo);
-
+    
     $scripters = array_unique(array_filter($_POST, function ($key) {
                 return stripos($key, 'scripter_') !== false;
             }, ARRAY_FILTER_USE_KEY));

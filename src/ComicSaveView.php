@@ -5,6 +5,8 @@ $comicId = filter_input(INPUT_GET, 'comicId', FILTER_SANITIZE_NUMBER_INT);
 $comic = new Comic();
 $comic->loadComicById($pdo, $comicId);
 
+$wantList = ($comic->getWantList()) ? 'YES' : 'NO';
+
 $title = new Title();
 $title->loadTitleById($pdo, $comic->getTitleId());
 
@@ -50,6 +52,10 @@ print drawHeader('Comic Saved');
             <tr>
                 <td>Notes</td>
                 <td><?php print $comic->getNotes(); ?></td>
+            </tr>
+            <tr>
+                <td>Want List?</td>
+                <td><?php print $wantList; ?></td>
             </tr>
         </tbody>
     </table>    
