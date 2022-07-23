@@ -4,8 +4,8 @@ require_once 'Setup.php';
 $comicId = filter_input(INPUT_GET, 'comicId', FILTER_SANITIZE_NUMBER_INT);
 $comic = new Comic();
 $comic->loadComicById($pdo, $comicId);
-
 $wantList = ($comic->getWantList()) ? 'YES' : 'NO';
+$hardCopy = ($comic->getHardCopy()) ? 'HARD COPY' : 'DIGITAL';
 
 $title = new Title();
 $title->loadTitleById($pdo, $comic->getTitleId());
@@ -56,6 +56,10 @@ print drawHeader('Comic Saved');
             <tr>
                 <td>Want List?</td>
                 <td><?php print $wantList; ?></td>
+            </tr>
+            <tr>
+                <td>Format</td>
+                <td><?php print $hardCopy; ?></td>
             </tr>
         </tbody>
     </table>    

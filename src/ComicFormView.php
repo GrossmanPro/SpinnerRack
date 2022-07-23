@@ -65,6 +65,12 @@ print drawHeader('Add New Comic');
                   Add to want list?
                 </label>
             </div>
+            <div class="form-check col-md-2">
+                <input class="form-check-input" type="checkbox" value="" id="hardCopy" name="hardCopy">
+                <label class="form-check-label" for="hardCopy">
+                  Hard copy?
+                </label>
+            </div>
         </div>
         <div class="row mb-3">
             <div class="form-floating col-md-6">

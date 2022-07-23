@@ -26,6 +26,12 @@ try {
         $comic->setWantList(false);
     }
     
+    if (array_key_exists('hardCopy', $_POST)) {
+        $comic->setHardCopy(true);
+    } else {
+        $comic->setHardCopy(false);
+    }
+    
     $comic->saveComic($pdo);
     
     $scripters = array_unique(array_filter($_POST, function ($key) {
