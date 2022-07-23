@@ -60,7 +60,7 @@ print drawHeader('Add New Comic');
                 <label for="stars">Rating</label>
             </div>
             <div class="form-check col-md-2">
-                <input class="form-check-input" type="checkbox" value="" id="wantList">
+                <input class="form-check-input" type="checkbox" value="" id="wantList" name="wantList">
                 <label class="form-check-label" for="wantList">
                   Add to want list?
                 </label>
