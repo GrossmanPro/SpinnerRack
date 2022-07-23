@@ -13,10 +13,10 @@ $(document).ready(function(){
             return;
         } 
         
-        var html = '<div class="input-group" id="artistDiv_' + artistCount + '">';
-        html += '<input type="text" class="form-control-plaintext" value="' + artistName + '" readonly>';
-        html += '<input type="button" class="btn btn-danger removeCreator" value="Delete">';
-        html += '<input type="hidden" id="artist_' + artistCount + '" name="artist_' + artistCount + '" value="' + artistId + '">';
+        var html = '<div class="input-group" id="artistDiv_' + encodeURIComponent(artistCount) + '">';
+        html += '<input type="text" class="form-control-plaintext" value="' + encodeURIComponent(artistName) + '" readonly>';
+        html += '<input type="button" class="btn btn-danger btn-sm removeCreator" value="Delete">';
+        html += '<input type="hidden" id="artist_' + encodeURIComponent(artistCount) + '" name="artist_' + encodeURIComponent(artistCount) + '" value="' + encodeURIComponent(artistId) + '">';
         html += '<div>';
         $("#artistList").append(html);
     });
@@ -31,10 +31,10 @@ $(document).ready(function(){
             return;
         }
         
-        var html = '<div class="input-group" id="scripterDiv_' + scripterCount + '">';
-        html += '<input type="text" class="form-control-plaintext" value="' + scripterName + '" readonly>';
-        html += '<input type="button" class="btn btn-danger removeCreator" value="Delete">';
-        html += '<input type="hidden" id="scripter_' + scripterCount + '" name="scripter_' + scripterCount + '" value="' + scripterId + '">';
+        var html = '<div class="input-group" id="scripterDiv_' + encodeURIComponent(scripterCount) + '">';
+        html += '<input type="text" class="form-control-plaintext" value="' + encodeURIComponent(scripterName) + '" readonly>';
+        html += '<input type="button" class="btn btn-danger btn-sm removeCreator" value="Delete">';
+        html += '<input type="hidden" id="scripter_' + encodeURIComponent(scripterCount) + '" name="scripter_' + encodeURIComponent(scripterCount) + '" value="' + encodeURIComponent(scripterId) + '">';
         html += '<div>';
         $("#scripterList").append(html);
     });  
