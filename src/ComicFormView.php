@@ -1,4 +1,5 @@
 <?php
+
 require_once 'Setup.php';
 
 $titleOptions = getSelectListOptions($pdo, 'Titles', 'OptionText');
@@ -57,6 +58,12 @@ print drawHeader('Add New Comic');
                     <option value="5">5</option>
                 </select>
                 <label for="stars">Rating</label>
+            </div>
+            <div class="form-check col-md-2">
+                <input class="form-check-input" type="checkbox" value="" id="wantList">
+                <label class="form-check-label" for="wantList">
+                  Add to want list?
+                </label>
             </div>
         </div>
         <div class="row mb-3">
