@@ -40,5 +40,5 @@ if (array_key_exists('status', $_GET)) {
 print $addForm;
 print Creator::getCreatorTable($pdo);
 print '</div>';
-print drawFooter(array('AdminCreator.js'));
+print drawFooter(array('AdminCreator-01.js'));
 

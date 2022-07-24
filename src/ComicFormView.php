@@ -100,4 +100,4 @@ print drawHeader('Add New Comic');
     </form>
 </div>
 <?php
-print drawFooter(array('ComicFormView.js'));
+print drawFooter(array('ComicFormView-01.js'));

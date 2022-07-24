@@ -47,4 +47,4 @@ if (array_key_exists('status', $_GET)) {
 <?php
 print Title::getTitlesTable($pdo);
 print '</div>';
-print drawFooter(array('AdminTitle.js'));
+print drawFooter(array('AdminTitle-01.js'));
