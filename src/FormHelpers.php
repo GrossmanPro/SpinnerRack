@@ -58,7 +58,7 @@ function drawHeader(string $title, array $cssFiles = null): string {
     $header .= '<nav class="navbar bg-light">';
     $header .= '<div class="container">';
     $header .= '<a class="navbar-brand" href="index.php">';
-    $header .= '<img src="/img/brand.svg" alt="Grossman Project-SpinnerRack" width="60" height="60">';
+    $header .= '<img src="/img/brand-01.svg" alt="Grossman Project-SpinnerRack" width="60" height="60">';
     $header .= '</a>';
     
     $header .= '<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">';
