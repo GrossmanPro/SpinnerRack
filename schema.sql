@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [SpinnerRack]    Script Date: 7/22/2022 6:46:34 PM ******/
+/****** Object:  Database [SpinnerRack]    Script Date: 7/25/2022 6:27:03 PM ******/
 CREATE DATABASE [SpinnerRack]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -80,7 +80,7 @@ ALTER DATABASE [SpinnerRack] SET QUERY_STORE = OFF
 GO
 USE [SpinnerRack]
 GO
-/****** Object:  User [SpinnerRackUser]    Script Date: 7/22/2022 6:46:35 PM ******/
+/****** Object:  User [SpinnerRackUser]    Script Date: 7/25/2022 6:27:03 PM ******/
 CREATE USER [SpinnerRackUser] FOR LOGIN [SpinnerRackUser] WITH DEFAULT_SCHEMA=[dbo]
 GO
 ALTER ROLE [db_ddladmin] ADD MEMBER [SpinnerRackUser]
@@ -89,7 +89,7 @@ ALTER ROLE [db_datareader] ADD MEMBER [SpinnerRackUser]
 GO
 ALTER ROLE [db_datawriter] ADD MEMBER [SpinnerRackUser]
 GO
-/****** Object:  Table [dbo].[Titles]    Script Date: 7/22/2022 6:46:35 PM ******/
+/****** Object:  Table [dbo].[Titles]    Script Date: 7/25/2022 6:27:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -106,7 +106,7 @@ CREATE TABLE [dbo].[Titles](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Publishers]    Script Date: 7/22/2022 6:46:35 PM ******/
+/****** Object:  Table [dbo].[Publishers]    Script Date: 7/25/2022 6:27:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -120,7 +120,7 @@ CREATE TABLE [dbo].[Publishers](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Comics]    Script Date: 7/22/2022 6:46:35 PM ******/
+/****** Object:  Table [dbo].[Comics]    Script Date: 7/25/2022 6:27:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -142,19 +142,20 @@ CREATE TABLE [dbo].[Comics](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[vwComicInfo]    Script Date: 7/22/2022 6:46:35 PM ******/
+/****** Object:  View [dbo].[vwComicInfo]    Script Date: 7/25/2022 6:27:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE VIEW [dbo].[vwComicInfo]
 AS
-SELECT dbo.Comics.Id, dbo.Comics.TitleId, dbo.Comics.Issue, dbo.Comics.Year, dbo.Comics.Month, dbo.Comics.Story, dbo.Comics.Notes, dbo.Comics.Stars, dbo.Comics.HardCopy, dbo.Comics.WantList, dbo.Publishers.Publisher, dbo.Titles.Name, dbo.Titles.StartYear, dbo.Titles.Volume
+SELECT dbo.Comics.Id, dbo.Comics.TitleId, dbo.Comics.Issue, dbo.Comics.Year, dbo.Comics.Month, dbo.Comics.Story, dbo.Comics.Notes, dbo.Comics.Stars, dbo.Publishers.Publisher, dbo.Titles.Name, dbo.Titles.StartYear, dbo.Titles.Volume, IIF(HardCopy != 1, 'DIGITAL', 'PHYSICAL') 
+             AS FormatType, IIF(WantList != 0, 'YES', 'NO') AS WantListYN
 FROM   dbo.Comics INNER JOIN
              dbo.Titles ON dbo.Comics.TitleId = dbo.Titles.Id INNER JOIN
              dbo.Publishers ON dbo.Titles.PublisherId = dbo.Publishers.Id
 GO
-/****** Object:  View [dbo].[TitlesOptionTags]    Script Date: 7/22/2022 6:46:35 PM ******/
+/****** Object:  View [dbo].[TitlesOptionTags]    Script Date: 7/25/2022 6:27:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -164,7 +165,7 @@ AS
 SELECT Id AS OptionValue, Name + ' (' + CAST(StartYear AS varchar) + ')' AS OptionText, StartYear
 FROM   dbo.Titles
 GO
-/****** Object:  Table [dbo].[Creators]    Script Date: 7/22/2022 6:46:35 PM ******/
+/****** Object:  Table [dbo].[Creators]    Script Date: 7/25/2022 6:27:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -179,7 +180,7 @@ CREATE TABLE [dbo].[Creators](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[CreatorsOptionTags]    Script Date: 7/22/2022 6:46:35 PM ******/
+/****** Object:  View [dbo].[CreatorsOptionTags]    Script Date: 7/25/2022 6:27:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -189,7 +190,7 @@ AS
 SELECT Id AS OptionValue, LastName + ', ' + FirstName AS OptionText
 FROM   dbo.Creators
 GO
-/****** Object:  View [dbo].[PublishersOptionTags]    Script Date: 7/22/2022 6:46:35 PM ******/
+/****** Object:  View [dbo].[PublishersOptionTags]    Script Date: 7/25/2022 6:27:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -199,7 +200,7 @@ AS
 SELECT Id AS OptionValue, Publisher AS OptionText
 FROM   dbo.Publishers
 GO
-/****** Object:  View [dbo].[TitlesView]    Script Date: 7/22/2022 6:46:35 PM ******/
+/****** Object:  View [dbo].[TitlesView]    Script Date: 7/25/2022 6:27:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -210,7 +211,7 @@ SELECT dbo.Publishers.Publisher, dbo.Titles.Id, dbo.Titles.Name, dbo.Titles.Star
 FROM   dbo.Publishers INNER JOIN
              dbo.Titles ON dbo.Publishers.Id = dbo.Titles.PublisherId
 GO
-/****** Object:  Table [dbo].[ArtBy]    Script Date: 7/22/2022 6:46:35 PM ******/
+/****** Object:  Table [dbo].[ArtBy]    Script Date: 7/25/2022 6:27:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -225,7 +226,7 @@ CREATE TABLE [dbo].[ArtBy](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ScriptBy]    Script Date: 7/22/2022 6:46:35 PM ******/
+/****** Object:  Table [dbo].[ScriptBy]    Script Date: 7/25/2022 6:27:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -240,14 +241,14 @@ CREATE TABLE [dbo].[ScriptBy](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Index [OneArtistsOneBook]    Script Date: 7/22/2022 6:46:35 PM ******/
+/****** Object:  Index [OneArtistsOneBook]    Script Date: 7/25/2022 6:27:03 PM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [OneArtistsOneBook] ON [dbo].[ArtBy]
 (
 	[ComicId] ASC,
 	[CreatorId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [UniqueComixOnly]    Script Date: 7/22/2022 6:46:35 PM ******/
+/****** Object:  Index [UniqueComixOnly]    Script Date: 7/25/2022 6:27:03 PM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UniqueComixOnly] ON [dbo].[Comics]
 (
 	[TitleId] ASC,
@@ -256,14 +257,14 @@ CREATE UNIQUE NONCLUSTERED INDEX [UniqueComixOnly] ON [dbo].[Comics]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UniqueNamesConstraint]    Script Date: 7/22/2022 6:46:35 PM ******/
+/****** Object:  Index [UniqueNamesConstraint]    Script Date: 7/25/2022 6:27:03 PM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UniqueNamesConstraint] ON [dbo].[Creators]
 (
 	[FirstName] ASC,
 	[LastName] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [OneScripterOneBook]    Script Date: 7/22/2022 6:46:35 PM ******/
+/****** Object:  Index [OneScripterOneBook]    Script Date: 7/25/2022 6:27:03 PM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [OneScripterOneBook] ON [dbo].[ScriptBy]
 (
 	[ComicId] ASC,
@@ -853,7 +854,7 @@ Begin DesignProperties =
       End
       Begin PaneConfiguration = 2
          NumPanes = 3
-         Configuration = "(H (1 [50] 2 [25] 3))"
+         Configuration = "(H (1[50] 2[25] 3) )"
       End
       Begin PaneConfiguration = 3
          NumPanes = 3
@@ -903,7 +904,7 @@ Begin DesignProperties =
          NumPanes = 1
          Configuration = "(V (2))"
       End
-      ActivePaneConfig = 4
+      ActivePaneConfig = 2
    End
    Begin DiagramPane = 
       Begin Origin = 
@@ -921,16 +922,6 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 6
          End
-         Begin Table = "Publishers"
-            Begin Extent = 
-               Top = 448
-               Left = 376
-               Bottom = 591
-               Right = 598
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
          Begin Table = "Titles"
             Begin Extent = 
                Top = 92
@@ -941,16 +932,33 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 1
          End
+         Begin Table = "Publishers"
+            Begin Extent = 
+               Top = 448
+               Left = 376
+               Bottom = 591
+               Right = 598
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
       End
    End
    Begin SQLPane = 
-      PaneHidden = 
    End
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 9
+      Begin ColumnWidths = 17
          Width = 284
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
          Width = 1000
          Width = 1000
          Width = 1000
