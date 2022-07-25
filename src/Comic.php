@@ -307,12 +307,12 @@ class Comic {
         $table .= '<tr>';
         $table .= '<th class="actionColumn text-center" data-orderable="false">Actions</th>';
         $table .= '<th>Name</th>';
-        $table .= '<th>Issue</th>';
-        $table .= '<th>Year</th>';
-        $table .= '<th>Volume</th>';
+        $table .= '<th class="text-center">Issue</th>';
+        $table .= '<th class="text-center">Year</th>';
+        $table .= '<th class="text-center">Volume</th>';
         $table .= '<th>Publisher</th>';
-        $table .= '<th>Want List?</th>';
-        $table .= '<th>Format</th>';
+        $table .= '<th class="text-center">Want List?</th>';
+        $table .= '<th class="text-center">Format</th>';
         $table .= '</tr>';
         $table .= '</thead>';
         $table .= '<tbody>';
@@ -322,12 +322,12 @@ class Comic {
             $table .= '<tr>';
             $table .= '<td class="text-center">' . $editBtn . '&nbsp;' . $deleteBtn . '</td>';
             $table .= '<td>' . $comic['Name'] . '</td>';
-            $table .= '<td>' . $comic['Issue']. '</td>';
-            $table .= '<td>' . $comic['Year']. '</td>';
-            $table .= '<td>' . $comic['Volume'] . '</td>';
+            $table .= '<td class="text-center">' . $comic['Issue']. '</td>';
+            $table .= '<td class="text-center">' . $comic['Year']. '</td>';
+            $table .= '<td class="text-ceneter">' . $comic['Volume'] . '</td>';
             $table .= '<td>' . $comic['Publisher'] . '</td>';
-            $table .= '<td>' . $comic['WantListYN'] . '</td>';
-            $table .= '<td>' . $comic['FormatType'] . '</td>';
+            $table .= '<td class="text-center">' . $comic['WantListYN'] . '</td>';
+            $table .= '<td class="text-center">' . $comic['FormatType'] . '</td>';
             $table .= '</tr>';
         }
         $table .= '</tbody>';
