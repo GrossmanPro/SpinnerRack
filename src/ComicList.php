@@ -1,7 +1,7 @@
 <?php
 
 require_once 'Setup.php';
-print drawHeader('Collection View');
+print drawHeader('Comics: List');
 
 $table = Comic::getComicsTable($pdo);
 
