@@ -292,5 +292,46 @@ class Comic {
         }        
         return $this->id;  // don't really need to return this if it's in the object...
     }
-
+    
+    /**
+     * getComicsTable
+     * 
+     * Generates HTML for table of comics w/edit and delete controls
+     * 
+     * @param object $pdo
+     * @return string
+     */
+    public static function getComicsTable(object $pdo): string {
+        $table = '<table id="comicsListTable" class="table table-sm table-bordered">';
+        $table .= '<thead>';
+        $table .= '<tr>';
+        $table .= '<th class="actionColumn text-center" data-orderable="false">Actions</th>';
+        $table .= '<th>Name</th>';
+        $table .= '<th>Issue</th>';
+        $table .= '<th>Year</th>';
+        $table .= '<th>Volume</th>';
+        $table .= '<th>Publisher</th>';
+        $table .= '<th>Want List?</th>';
+        $table .= '<th>Format</th>';
+        $table .= '</tr>';
+        $table .= '</thead>';
+        $table .= '<tbody>';
+        foreach ($pdo->query('SELECT * FROM vwComicInfo ORDER BY [Name], Year, Issue ASC') as $comic) {
+            $editBtn = '<a href="/admin/titles/edit/' . $comic['Id'] . '/" class="btn btn-sm btn-info" id="btnEdit_' . $comic['Id'] . '">Edit</a>';
+            $deleteBtn = '<input type="button" class="btn btn-sm btn-danger deleteComic" id="btnDelete_' . $comic['Id'] . '" value="Delete">';
+            $table .= '<tr>';
+            $table .= '<td class="text-center">' . $editBtn . '&nbsp;' . $deleteBtn . '</td>';
+            $table .= '<td>' . $comic['Name'] . '</td>';
+            $table .= '<td>' . $comic['Issue']. '</td>';
+            $table .= '<td>' . $comic['Year']. '</td>';
+            $table .= '<td>' . $comic['Volume'] . '</td>';
+            $table .= '<td>' . $comic['Publisher'] . '</td>';
+            $table .= '<td>' . $comic['WantListYN'] . '</td>';
+            $table .= '<td>' . $comic['FormatType'] . '</td>';
+            $table .= '</tr>';
+        }
+        $table .= '</tbody>';
+        $table .= '</table>';
+        return $table;
+    }
 }
