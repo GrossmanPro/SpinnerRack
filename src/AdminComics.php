@@ -1,7 +1,7 @@
 <?php
 
 require_once 'Setup.php';
-print drawHeader('Comics: List');
+print drawHeader('Admin: Comics');
 
 $table = Comic::getComicsTable($pdo);
 
