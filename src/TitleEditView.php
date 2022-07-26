@@ -1,7 +1,8 @@
 <?php
+
 require_once 'Setup.php';
 
-print drawHeader('Admin: Publishers'); 
+print drawHeader('Admin: Edit Title'); 
 
 $titleId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 $title = new Title();
@@ -9,8 +10,6 @@ $title->loadTitleById($pdo, $titleId);
 $name = $title->getName();
 $year = $title->getStartYear();
 $volume = $title->getVolume();
-
-
 $selectListOptions = getSelectListOptions($pdo, 'Publishers', 'OptionText', $title->getPublisherId());
 
 $editForm = <<< eod

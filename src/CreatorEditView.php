@@ -1,7 +1,7 @@
 <?php
 require_once 'Setup.php';
 
-print drawHeader('Admin: Creators'); 
+print drawHeader('Admin: Edit Creators'); 
 
 
 $creatorId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);

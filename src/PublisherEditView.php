@@ -1,7 +1,7 @@
 <?php
 require_once 'Setup.php';
 
-print drawHeader('Admin: Publishers'); 
+print drawHeader('Admin: Edit Publisher'); 
 
 $publisherId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 $pub = new Publisher();
