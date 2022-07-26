@@ -14,4 +14,4 @@ EOD;
 
 print $comicList;
 
-print drawFooter(array('ComicList.js'));
+print drawFooter(array('AdminComics-01.js'));
