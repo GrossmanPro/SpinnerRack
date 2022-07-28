@@ -4,7 +4,7 @@
 
 /**
  * getSelectListOptions
- * Generates select list options from *OptionTags views in database.
+ * Generates select list options from OptionTags views in database.
  * $table and $orderBy are not user controlled, no SQL injection risk.
  * @param object $pdo
  * @param string $table
@@ -14,7 +14,6 @@
  */
 function getSelectListOptions(object $pdo, string $table, string $orderBy, int $selected = 0): string {
     $sql = 'SELECT * FROM ' . $table . 'OptionTags ORDER BY ' . $orderBy;
-    // remove trailing comma and get results  
     $results = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC); 
     $options = '<option value="0">&nbsp;</option>';
     foreach ($results as $result) {
