@@ -12,7 +12,7 @@ $hardCopyChecked = ($comic->getHardCopy()) ? 'checked' : '';
 $wantListChecked = ($comic->getWantList()) ? 'checked' : '';
 $titleOptions = getSelectListOptions($pdo, 'Titles', 'OptionText', $comic->getTitleId());
 $artists = getExistingCreatorDivs($comic, true);
-$scripters = getExistingCreatorDivs($comic, true);
+$scripters = getExistingCreatorDivs($comic, false);
 
 
 print drawHeader('Admin: Edit Comic');
