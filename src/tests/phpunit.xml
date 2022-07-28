@@ -33,6 +33,15 @@
 		<file>../Setup.php</file>
                 <file>../AdminCreator.php</file>
                 <file>../AdminCreatorController.php</file>
+                <file>../AdminComics.php</file>
+                <file>../AdminComicsController.php</file>
+                <file>../AdminPublisher.php</file>
+                <file>../AdminPublisher/Controller.php</file>
+                <file>../AdminTitle.php</file>
+                <file>../AdminTitleController.php</file>
+                <file>../PublisherEditView.php</file>
+                <file>../TitleEditView.php</file>
+                <file>../ComicEditView.php</file>
         </exclude>
     </coverage>
 </phpunit>
