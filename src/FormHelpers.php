@@ -3,7 +3,7 @@
 // load after DbConfig.php and DbConn.php and object classes
 
 /**
- * Function getSelectListOptions
+ * getSelectListOptions
  * Generates select list options from *OptionTags views in database.
  * $table and $orderBy are not user controlled, no SQL injection risk.
  * @param object $pdo
@@ -29,7 +29,7 @@ function getSelectListOptions(object $pdo, string $table, string $orderBy, int $
 }
 
 /**
- * Function drawHeader
+ * drawHeader
  * Returns markup for standard page header.
  * Optionally adds custom CSS files.
  * @param string $title
@@ -90,7 +90,7 @@ function drawHeader(string $title, array $cssFiles = null): string {
 }
 
 /**
- * Function drawFooter
+ * drawFooter
  * Returns markup for standard page footer.
  * Optionally adds custom JavaScript files.
  * @param array $jsFiles
@@ -111,6 +111,13 @@ function drawFooter(array $jsFiles = null): string {
     return $footer;
 }
 
+/**
+ * getExistingCreatorDivs
+ * Set up existing creator divs for selected comic.
+ * @param Comic $comic          Comic object
+ * @param bool $loadArtists     true = load artists, false = load scripters
+ * @return string               div markup w/delete buttons and hidden form fields
+ */
 function getExistingCreatorDivs (Comic $comic, bool $loadArtists): string {
     $html = '';
     $divCnt = 0;
