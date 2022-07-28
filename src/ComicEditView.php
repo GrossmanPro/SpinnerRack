@@ -2,14 +2,17 @@
 
 require_once 'Setup.php';
 
+$creatorOptions = getSelectListOptions($pdo, 'Creators', 'OptionText');
 $comicId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 $comic = new Comic();
 $comic->loadComicById($pdo, $comicId);
 
+// get form values for selected comic
 $hardCopyChecked = ($comic->getHardCopy()) ? 'checked' : '';
 $wantListChecked = ($comic->getWantList()) ? 'checked' : '';
-
 $titleOptions = getSelectListOptions($pdo, 'Titles', 'OptionText', $comic->getTitleId());
+$artists = getExistingCreatorDivs($comic, true);
+$scripters = getExistingCreatorDivs($comic, true);
 
 
 print drawHeader('Admin: Edit Comic');
@@ -87,14 +90,14 @@ print drawHeader('Admin: Edit Comic');
                     <?php print $creatorOptions; ?>
                 </select>
                 <label for="title">Writer(s)</label>
-                <div id="scripterList"></div>
+                <div id="scripterList"><?php print $scripters; ?></div>
             </div>
             <div class="form-floating col-md-3">
                 <select class="form-select" id="artists" name="artists" title="Comic artist or artists">
                     <?php print $creatorOptions; ?>
                 </select>
                 <label for="title">Artist(s)</label>
-                <div id="artistList"></div>
+                <div id="artistList"><?php print $artists; ?></div>
             </div>
             <div class="col-md-1">
                 <input type="button" class="btn btn-primary" id="submitComic" value="Save Comic">
