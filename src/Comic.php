@@ -317,7 +317,7 @@ class Comic {
         $table .= '</thead>';
         $table .= '<tbody>';
         foreach ($pdo->query('SELECT * FROM vwComicInfo ORDER BY [Name], Year, Issue ASC') as $comic) {
-            $editBtn = '<a href="/admin/titles/edit/' . $comic['Id'] . '/" class="btn btn-sm btn-info" id="btnEdit_' . $comic['Id'] . '">Edit</a>';
+            $editBtn = '<a href="/admin/comics/edit/' . $comic['Id'] . '/" class="btn btn-sm btn-info" id="btnEdit_' . $comic['Id'] . '">Edit</a>';
             $deleteBtn = '<input type="button" class="btn btn-sm btn-danger deleteComic" id="btnDelete_' . $comic['Id'] . '" value="Delete">';
             $table .= '<tr>';
             $table .= '<td class="text-center">' . $editBtn . '&nbsp;' . $deleteBtn . '</td>';
@@ -333,5 +333,18 @@ class Comic {
         $table .= '</tbody>';
         $table .= '</table>';
         return $table;
+    }
+    
+    /**
+     * deleteComic
+     * 
+     * @param object $pdo
+     * @param int $comicId  Comic.Id (primary key)
+     * @return void
+     */
+    public static function deleteComic(object $pdo, int $comicId): void {
+        $sql = 'DELETE FROM Comics WHERE Id = :Id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array($comicId));
     }
 }
