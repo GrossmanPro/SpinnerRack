@@ -14,7 +14,7 @@ $(document).ready(function(){
         } 
         
         var html = '<div class="input-group" id="artistDiv_' + encodeURIComponent(artistCount) + '">';
-        html += '<input type="text" class="form-control-plaintext" value="' + encodeURIComponent(artistName) + '" readonly>';
+        html += '<input type="text" class="form-control-plaintext" value="' + encodeURIComponent(artistName).replace('%2C%20', ', ') + '" readonly>';
         html += '<input type="button" class="btn btn-danger btn-sm removeCreator" value="Delete">';
         html += '<input type="hidden" id="artist_' + encodeURIComponent(artistCount) + '" name="artist_' + encodeURIComponent(artistCount) + '" value="' + encodeURIComponent(artistId) + '">';
         html += '<div>';
@@ -32,7 +32,7 @@ $(document).ready(function(){
         }
         
         var html = '<div class="input-group" id="scripterDiv_' + encodeURIComponent(scripterCount) + '">';
-        html += '<input type="text" class="form-control-plaintext" value="' + encodeURIComponent(scripterName) + '" readonly>';
+        html += '<input type="text" class="form-control-plaintext" value="' + encodeURIComponent(scripterName).replace('%2C%20', ', ') + '" readonly>';
         html += '<input type="button" class="btn btn-danger btn-sm removeCreator" value="Delete">';
         html += '<input type="hidden" id="scripter_' + encodeURIComponent(scripterCount) + '" name="scripter_' + encodeURIComponent(scripterCount) + '" value="' + encodeURIComponent(scripterId) + '">';
         html += '<div>';
