@@ -113,7 +113,7 @@ function drawFooter(array $jsFiles = null): string {
 /**
  * getExistingCreatorDivs
  * Set up existing creator divs for selected comic.
- * $divCnt starts at 100 to avoid name/id conflicts with
+ * $divCnt starts with time() to avoid name/id conflicts with
  * dynamically created creator divs from ComicFormView-x.js.
  * @param Comic $comic          Comic object
  * @param bool $loadArtists     true = load artists, false = load scripters
@@ -121,7 +121,7 @@ function drawFooter(array $jsFiles = null): string {
  */
 function getExistingCreatorDivs (Comic $comic, bool $loadArtists): string {
     $html = '';
-    $divCnt = 100; 
+    $divCnt = time(); 
     if ($loadArtists) {
         foreach ($comic->artists as $artist) {
             $html .= '<div class="input-group" id="artistDiv_' . $divCnt . '">';
