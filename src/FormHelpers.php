@@ -125,7 +125,11 @@ function getExistingCreatorDivs (Comic $comic, bool $loadArtists): string {
     if ($loadArtists) {
         foreach ($comic->artists as $artist) {
             $html .= '<div class="input-group" id="artistDiv_' . $divCnt . '">';
-            $html .= '<input type="text"class="form-control-plaintext" value="' . $artist->getLastName() . ', ' . $artist->getFirstName() . '" readonly>';
+            $html .= '<input '
+                    . 'type="text" '
+                    . 'class="form-control-plaintext" '
+                    . 'value="' . $artist->getLastName() . ', ' . $artist->getFirstName() . '" '
+                    . 'title="' . $artist->getLastName() . ', ' . $artist->getFirstName() . '" readonly>';
             $html .= '<input type="button" class="btn btn-danger btn-sm removeCreator" value="Delete">';
             $html .= '<input type="hidden" id="artist_' . $divCnt . '" name="artist_' . $divCnt . '" value="' . $artist->getId() . '">';
             $html .= '</div>';
@@ -134,7 +138,11 @@ function getExistingCreatorDivs (Comic $comic, bool $loadArtists): string {
     } else {
         foreach ($comic->scripters as $scripter) {
             $html .= '<div class="input-group" id="scripterDiv_' . $divCnt . '">';
-            $html .= '<input type="text"class="form-control-plaintext" value="' . $scripter->getLastName() . ', ' . $scripter->getFirstName() . '" readonly>';
+            $html .= '<input '
+                    . 'type="text" '
+                    . 'class="form-control-plaintext" '
+                    . 'value="' . $scripter->getLastName() . ', ' . $scripter->getFirstName() . '" '
+                    . 'title="' . $scripter->getLastName() . ', ' . $scripter->getFirstName() . '" readonly>';
             $html .= '<input type="button" class="btn btn-danger btn-sm removeCreator" value="Delete">';
             $html .= '<input type="hidden" id="scripter_' . $divCnt . '" name="scripter_' . $divCnt . '" value="' . $scripter->getId() . '">';
             $html .= '</div>';   
