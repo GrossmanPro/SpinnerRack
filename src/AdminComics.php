@@ -10,6 +10,10 @@ $comicList = <<<EOD
 <p class="h4">Comics: List</p>
 $table
 </div>
+<form id="comicDelete" method="post" action="/admin/comics/save">
+    $tokenTag
+    <input type="hidden" id="deleteId" name="deleteId" value="0">
+</form>
 EOD;
 
 print $comicList;
