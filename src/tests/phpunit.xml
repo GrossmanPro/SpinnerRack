@@ -41,6 +41,7 @@
                 <file>../AdminTitleController.php</file>
                 <file>../PublisherEditView.php</file>
                 <file>../TitleEditView.php</file>
+                <file>../CreatorEditView.php</file>
                 <file>../ComicEditView.php</file>
                 <file>../Setup.php</file>
         </exclude>
