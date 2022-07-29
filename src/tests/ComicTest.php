@@ -217,6 +217,7 @@ class ComicTest extends TestCase {
      * @covers \Comic::getId
      * @covers \Comic::loadComicById
      * @covers \Comic::getStars
+     * @covers \Comic::getComicsTable
      */
     function testUpdateComicValues(Comic $comic) {
         global $pdo;  
@@ -233,6 +234,11 @@ class ComicTest extends TestCase {
         $this->assertEquals("Crisis On Infinite Jupiters", $updatedComic->getStory());
         // still the same value
         $this->assertEquals(1979, $updatedComic->getYear());  
+        
+        // spot check table output
+        $table = $updatedComic->getComicsTable($pdo);
+        $this->assertStringContainsString("<table id=\"comicsListTable\"", $table);
+        $this->assertStringContainsString("</table>", $table);
         
         // reset for another run
         $sql = 'DELETE FROM Comics WHERE Id = :Id';
