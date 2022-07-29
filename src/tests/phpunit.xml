@@ -36,7 +36,7 @@
                 <file>../AdminComics.php</file>
                 <file>../AdminComicsController.php</file>
                 <file>../AdminPublisher.php</file>
-                <file>../AdminPublisher/Controller.php</file>
+                <file>../AdminPublisherController.php</file>
                 <file>../AdminTitle.php</file>
                 <file>../AdminTitleController.php</file>
                 <file>../PublisherEditView.php</file>
