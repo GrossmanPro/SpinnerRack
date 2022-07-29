@@ -36,6 +36,7 @@ class PublisherTest extends TestCase {
      * @covers \Publisher::getPublisherName
      * @covers \Publisher::__construct
      * @covers \Publisher::deletePublisher
+     * @covers \Publisher::getPublisherTable
      */
     public function testSavePublisherUpdateSuccess(int $id) { 
         global $pdo;
@@ -44,7 +45,12 @@ class PublisherTest extends TestCase {
         $publisher->setPublisherName("Delete This Publisher");
         $idPostSave = $publisher->savePublisher($pdo);  
         $this->assertTrue(is_int($idPostSave));    
-        $this->assertEquals("Delete This Publisher", $publisher->getPublisherName());
+        $this->assertEquals("Delete This Publisher", $publisher->getPublisherName()); 
+        
+        // spot check table output
+        $table = Publisher::getPublisherTable($pdo);
+        $this->assertStringContainsString("<table id=\"adminPublishersTable\"", $table);
+        $this->assertStringContainsString("</table>", $table);
         
         // reset for another run / check delete static function
         Publisher::deletePublisher($pdo, $id);
