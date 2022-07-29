@@ -218,6 +218,7 @@ class ComicTest extends TestCase {
      * @covers \Comic::loadComicById
      * @covers \Comic::getStars
      * @covers \Comic::getComicsTable
+     * @covers \Comic::getStarSvgs
      */
     function testUpdateComicValues(Comic $comic) {
         global $pdo;  
@@ -239,6 +240,10 @@ class ComicTest extends TestCase {
         $table = $updatedComic->getComicsTable($pdo);
         $this->assertStringContainsString("<table id=\"comicsListTable\"", $table);
         $this->assertStringContainsString("</table>", $table);
+        
+        // check svg string
+        $svgs = $updatedComic->getStarSvgs();
+        $this->assertStringContainsString("bi-star-fill", $svgs);
         
         // reset for another run
         $sql = 'DELETE FROM Comics WHERE Id = :Id';
