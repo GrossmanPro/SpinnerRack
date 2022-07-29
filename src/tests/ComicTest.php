@@ -219,6 +219,7 @@ class ComicTest extends TestCase {
      * @covers \Comic::getStars
      * @covers \Comic::getComicsTable
      * @covers \Comic::getStarSvgs
+     * @covers \Comic::deleteComic
      */
     function testUpdateComicValues(Comic $comic) {
         global $pdo;  
@@ -227,12 +228,15 @@ class ComicTest extends TestCase {
         $comic->saveComic($pdo);
         $id = $comic->getId();    
         unset($comic);      
+        
         // reload and check new values 
         $updatedComic = new Comic();
         $updatedComic->loadComicById($pdo, $id);
+        
         // new values
         $this->assertEquals(1, $updatedComic->getStars());
         $this->assertEquals("Crisis On Infinite Jupiters", $updatedComic->getStory());
+        
         // still the same value
         $this->assertEquals(1979, $updatedComic->getYear());  
         
@@ -245,10 +249,13 @@ class ComicTest extends TestCase {
         $svgs = $updatedComic->getStarSvgs();
         $this->assertStringContainsString("bi-star-fill", $svgs);
         
-        // reset for another run
-        $sql = 'DELETE FROM Comics WHERE Id = :Id';
-        $stmt = $pdo->prepare($sql);
+        // reset for another run / check delete static function
+        Comic::deleteComic($pdo, $updatedComic->getId());
+        $delSql = 'SELECT COUNT(*) AS rowCnt FROM Comics WHERE ID = :id';
+        $stmt = $pdo->prepare($delSql);
         $stmt->execute(array($id));
+        $result = $stmt->fetchColumn();
+        $this->assertEquals(0, $result);        
     }
     
     
