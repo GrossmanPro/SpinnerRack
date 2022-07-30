@@ -5,6 +5,12 @@ print drawHeader('Admin: Comics');
 
 $table = Comic::getComicsTable($pdo);
 
+if (array_key_exists('status', $_GET)) {
+    $action = FILTER_INPUT(INPUT_GET, 'status', FILTER_SANITIZE_SPECIAL_CHARS);
+    print '<div class="alert alert-success text-center"><strong>Comic record ' . $action . '</strong></div>';
+} 
+
+
 $comicList = <<<EOD
 <div class="container pt-4">
 <p class="h4">Comics: List</p>

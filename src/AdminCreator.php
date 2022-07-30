@@ -2,6 +2,11 @@
 require_once 'Setup.php';
 print drawHeader('Admin: Creators');  
 
+if (array_key_exists('status', $_GET)) {
+    $action = FILTER_INPUT(INPUT_GET, 'status', FILTER_SANITIZE_SPECIAL_CHARS);
+    print '<div class="alert alert-success text-center"><strong>Creator record ' . $action . '</strong></div>';
+} 
+
 $addForm = <<<EOD
 <div class="container pt-4">
 <p class="h4">Admin: Creators</p>
@@ -31,11 +36,6 @@ $tokenTag
 </form>
 EOD;
 
-if (array_key_exists('status', $_GET)) {
-    if ($_GET['status']== 'ok') {
-        print '<div class="alert alert-success text-center"><strong>Creator record changed</strong></div>';
-    }
-}
 
 print $addForm;
 print Creator::getCreatorTable($pdo);

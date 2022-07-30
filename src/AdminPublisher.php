@@ -2,6 +2,12 @@
 require_once 'Setup.php';
 print drawHeader('Admin: Publisher');  
 
+if (array_key_exists('status', $_GET)) {
+    $action = FILTER_INPUT(INPUT_GET, 'status', FILTER_SANITIZE_SPECIAL_CHARS);
+    print '<div class="alert alert-success text-center"><strong>Publisher record ' . $action . '</strong></div>';
+} 
+
+
 $addForm = <<< eod
 <div class="container pt-4">
 <p class="h4">Admin: Publishers</p>
@@ -22,12 +28,6 @@ $tokenTag
         <input type="hidden" id="deleteId" name="deleteId" value="0">
 </form> 
 eod;
-
-if (array_key_exists('status', $_GET)) {
-    if ($_GET['status']== 'ok') {
-        print '<div class="alert alert-success text-center"><strong>Publisher record changed</strong></div>';
-    }
-}
 
 print $addForm;
 print Publisher::getPublisherTable($pdo);
