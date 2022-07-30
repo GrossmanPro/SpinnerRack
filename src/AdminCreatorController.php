@@ -15,6 +15,7 @@ try {
     if (array_key_exists('deleteId', $_POST)) {
         $creatorId = filter_input(INPUT_POST, 'deleteId', FILTER_SANITIZE_NUMBER_INT);
         Creator::deleteCreator($pdo, $creatorId);
+        header('Location: /admin/creators/deleted');
     } else if (array_key_exists('editId', $_POST)) {
         $creatorId = filter_input(INPUT_POST, 'editId', FILTER_SANITIZE_NUMBER_INT);
         $creator = new Creator();
@@ -22,13 +23,14 @@ try {
         $creator->setFirstName($firstName);
         $creator->setLastName($lastName);
         $creator->saveCreator($pdo);
+        header('Location: /admin/creators/saved');
     } else {
         $creator = new Creator();
         $creator->setFirstName($firstName);
         $creator->setLastName($lastName);
-        $creator->saveCreator($pdo);        
+        $creator->saveCreator($pdo);    
+        header('Location: /admin/creators/added');    
     }
-    header('Location: /admin/creators/ok');
 } catch (Exception $e) {
     header('Location: GeneralError.php');
 }
