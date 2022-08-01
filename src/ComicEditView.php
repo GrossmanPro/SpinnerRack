@@ -13,13 +13,13 @@ $wantListChecked = ($comic->getWantList()) ? 'checked' : '';
 $titleOptions = getSelectListOptions($pdo, 'Titles', 'OptionText', $comic->getTitleId());
 $artists = getExistingCreatorDivs($comic, true);
 $scripters = getExistingCreatorDivs($comic, false);
-
+$starOptions = getStarOptions($comic->getStars());
 
 print drawHeader('Admin: Edit Comic');
 ?>
 <div class="container pt-4">
     <p class="h4">Edit Comic</p>
-    <form id="comicInput" method="post" action="/added">
+    <form id="comicInput" method="post" action="/admin/comics/save">
         <?php print $tokenTag; ?>
         <div class="row mb-3">
             <div class="form-floating col-md-6">
@@ -61,11 +61,7 @@ print drawHeader('Admin: Edit Comic');
             </div>              
             <div class="form-floating col-md-2">
                 <select class="form-select" id="stars" name="stars" title="Comic rating">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+                    <?php print $starOptions; ?>
                 </select>
                 <label for="stars">&nbsp;&nbsp;Rating</label>
             </div>

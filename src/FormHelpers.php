@@ -28,6 +28,20 @@ function getSelectListOptions(object $pdo, string $table, string $orderBy, int $
 }
 
 /**
+ * getStarOptions
+ * @param int $stars
+ * @return string
+ */
+function getStarOptions(int $stars = 0): string {
+    $options = '';
+    for ($cnt = 1; $cnt <= 5; $cnt++) {
+        $selected = ($stars === $cnt) ? ' selected ': '';
+        $options .= '<option value="' . $cnt . '"' . $selected . '>'. $cnt . '</option>';        
+    }
+    return $options;
+}
+
+/**
  * drawHeader
  * Returns markup for standard page header.
  * Optionally adds custom CSS files.
