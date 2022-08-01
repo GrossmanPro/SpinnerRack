@@ -14,6 +14,7 @@ $titleOptions = getSelectListOptions($pdo, 'Titles', 'OptionText', $comic->getTi
 $artists = getExistingCreatorDivs($comic, true);
 $scripters = getExistingCreatorDivs($comic, false);
 $starOptions = getStarOptions($comic->getStars());
+$monthOptions = getMonthOptions($comic->getMonth());
 
 print drawHeader('Admin: Edit Comic');
 ?>
@@ -34,18 +35,7 @@ print drawHeader('Admin: Edit Comic');
             </div>  
             <div class="form-floating col-md-2">
                 <select class="form-select" id="month" name="month" title="Month of publication">
-                    <option value="1">JAN</option>
-                    <option value="2">FEB</option>
-                    <option value="3">MAR</option>
-                    <option value="4">APR</option>
-                    <option value="5">MAY</option>
-                    <option value="6">JUN</option>
-                    <option value="7">JUL</option>
-                    <option value="8">AUG</option>
-                    <option value="9">SEP</option>
-                    <option value="10">OCT</option>
-                    <option value="11">NOV</option>
-                    <option value="12">DEC</option>
+                    <?php $monthOptions; ?>
                 </select>
                 <label for="month">&nbsp;&nbsp;Cover month</label>
             </div>

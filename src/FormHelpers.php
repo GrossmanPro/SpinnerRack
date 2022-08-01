@@ -35,10 +35,20 @@ function getSelectListOptions(object $pdo, string $table, string $orderBy, int $
 function getStarOptions(int $stars = 0): string {
     $options = '';
     for ($cnt = 1; $cnt <= 5; $cnt++) {
-        $selected = ($stars === $cnt) ? ' selected ': '';
+        $selected = ($stars === $cnt) ? ' selected ' : '';
         $options .= '<option value="' . $cnt . '"' . $selected . '>'. $cnt . '</option>';        
     }
     return $options;
+}
+
+function getMonthOptions(int $month = 0): string {
+    $options = '';
+    for ($cnt = 1; $cnt <= 12; $cnt++) {
+        $selected = ($month === $cnt) ? ' selected ' : '';
+        $monthVal = date('M', strtotime($cnt . '/1/1970'));
+        $options .= '<option value="' . $cnt . '"' . $selected . '>'. $monthVal . '</option>';
+        
+    }
 }
 
 /**
