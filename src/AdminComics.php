@@ -25,33 +25,33 @@ $comicAddForm = <<<EOFORM
                 <select class="form-select" id="title" name="title" title="Comic title" autofocus>
                     $titleOptions
                 </select>
-                <label for="title">Title</label>
+                <label for="title">&nbsp;&nbsp;Title</label>
             </div>
             <div class="form-floating col-md-2">
                 <input type="text" class="form-control" id="issue" name="issue" title="Issue number" required>
-                <label for="issue">Issue No</label>
+                <label for="issue">&nbsp;&nbsp;Issue No</label>
             </div>  
             <div class="form-floating col-md-2">
                 <select class="form-select" id="month" name="month" title="Month of publication">
                     $monthOptions
                 </select>
-                <label for="month">Cover month</label>
+                <label for="month">&nbsp;&nbsp;Cover month</label>
             </div>
             <div class="form-floating col-md-2">
                 <input type="text" class="form-control" id="year" name="year" maxlength="4" min="1930" max="2100" title="Year of publication" required>
-                <label for="year">Year</label>
+                <label for="year">&nbsp;&nbsp;Year</label>
             </div>
         </div>
         <div class="row mb-3">
             <div class="form-floating col-md-6">
               <input type="text" class="form-control" id="story" name="story" title="Story" req uired>
-              <label for="story">Story</label>
+              <label for="story">&nbsp;&nbsp;Story</label>
             </div>              
             <div class="form-floating col-md-2">
                 <select class="form-select" id="stars" name="stars" title="Comic rating">
                     $starOptions
                 </select>
-                <label for="stars">Rating</label>
+                <label for="stars">&nbsp;&nbsp;Rating</label>
             </div>
             <div class="form-check col-md-2">
                 <input class="form-check-input" type="checkbox" value="" id="wantList" name="wantList">
@@ -69,7 +69,7 @@ $comicAddForm = <<<EOFORM
         <div class="row mb-3">
             <div class="form-floating col-md-6">
                 <textarea class="form-control" rows="4" id="notes" name="notes" title="Story notes"></textarea>
-                <label for="notes">Notes</label>
+                <label for="notes">&nbsp;&nbsp;Notes</label>
             </div>                      
         </div>    
         <div class="row mb-3">
@@ -77,14 +77,14 @@ $comicAddForm = <<<EOFORM
                 <select class="form-select" id="scripters" name="scripters" title="Comic scripter or scripters">
                     $creatorOptions
                 </select>
-                <label for="title">Writer(s)</label>
+                <label for="title">&nbsp;&nbsp;Writer(s)</label>
                 <div id="scripterList"></div>
             </div>
             <div class="form-floating col-md-3">
                 <select class="form-select" id="artists" name="artists" title="Comic artist or artists">
                     $creatorOptions 
                 </select>
-                <label for="title">Artist(s)</label>
+                <label for="title">&nbsp;&nbsp;Artist(s)</label>
                 <div id="artistList"></div>
             </div>
             <div class="col-md-1">
