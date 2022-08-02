@@ -41,14 +41,19 @@ function getStarOptions(int $stars = 0): string {
     return $options;
 }
 
+/**
+ * getMonthOptions
+ * @param int $month
+ * @return string
+ */
 function getMonthOptions(int $month = 0): string {
     $options = '';
     for ($cnt = 1; $cnt <= 12; $cnt++) {
         $selected = ($month === $cnt) ? ' selected ' : '';
         $monthVal = date('M', strtotime($cnt . '/1/1970'));
-        $options .= '<option value="' . $cnt . '"' . $selected . '>'. $monthVal . '</option>';
-        
+        $options .= '<option value="' . $cnt . '"' . $selected . '>'. $monthVal . '</option>';        
     }
+    return $options;
 }
 
 /**
