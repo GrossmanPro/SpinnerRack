@@ -10,6 +10,10 @@ class Publisher {
         $this->publisherName =  "";
     }
     
+    /**
+     * getPublisherId
+     * @return int
+     */
     public function getPublisherId(): int {
         return $this->id;
     }
