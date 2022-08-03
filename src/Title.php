@@ -16,22 +16,42 @@ class Title {
         $this->startYear = 0;
     }
     
+    /**
+     * getId
+     * @return int
+     */
     public function getId() : int {
         return $this->id;
     }
     
+    /**
+     * getName
+     * @return string
+     */
     public function getName(): string {
         return $this->name;
     }
     
+    /**
+     * setName
+     * @param string $name
+     */
     public function setName(string $name) {
         $this->name = filter_var($name, FILTER_SANITIZE_SPECIAL_CHARS); 
     }
     
+    /**
+     * getStartYear
+     * @return int
+     */
     public function getStartYear(): int {
         return $this->startYear;
     }
     
+    /**
+     * setStartYear
+     * @param int $year
+     */
     public function setStartYear(int $year) {
         $this->startYear = filter_var($year, FILTER_SANITIZE_NUMBER_INT);
     }
@@ -40,18 +60,36 @@ class Title {
         return $this->volume;
     }
     
+    /**
+     * setVolume
+     * @param int $volume
+     */
     public function setVolume(int $volume) {
         $this->volume = filter_var($volume, FILTER_SANITIZE_NUMBER_INT);
     } 
     
+    /**
+     * getPublisherId
+     * @return int
+     */
     public function getPublisherId(): int {
         return $this->publisherId;
     }
     
+    /**
+     * setPublisherId
+     * @param int $pubId
+     */
     public function setPublisherId(int $pubId) {
         $this->publisherId = filter_var($pubId, FILTER_SANITIZE_NUMBER_INT);
     }
     
+    /**
+     * loadTitleById
+     * @param object $pdo
+     * @param int $id
+     * @throws Exception
+     */
     public function loadTitleById(object $pdo, int $id) {
         $sql = 'SELECT * FROM Titles WHERE Id = :id';
         $stmt = $pdo->prepare($sql);
@@ -74,6 +112,12 @@ class Title {
         
     }
 
+    /**
+     * saveTitle
+     * Handles updates and inserts to Titles table
+     * @param object $pdo
+     * @return int
+     */
     public function saveTitle(object $pdo): int {
         if ($this->id) {
             $sql = 'UPDATE Titles SET '
