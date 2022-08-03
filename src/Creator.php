@@ -6,30 +6,54 @@ class Creator {
     private $firstName;
     private $lastName;
 
+    /**
+     * __construct
+     */
     public function __construct() {
         $this->id = 0;
         $this->firstName = "";
         $this->lastName = "";
     }
     
-    public function getId() {
+    /**
+     * getId
+     * Returns Creators.Id
+     * @return int
+     */
+    public function getId(): int {
         return $this->id;
     }
 
+    /**
+     * getFirstName
+     * @return string
+     */
     public function getFirstName(): string {
         return $this->firstName;
     }
 
+    /**
+     * setFirstName
+     * @param string $firstName
+     */
     public function setFirstName(string $firstName) {
-        $this->firstName = filter_var($firstName, FILTER_UNSAFE_RAW);
+        $this->firstName = filter_var($firstName, FILTER_SANITIZE_SPECIAL_CHARS);
     }
 
+    /**
+     * getLastName
+     * @return string
+     */
     public function getLastName(): string {
         return $this->lastName;
     }
 
+    /**
+     * setLastName
+     * @param string $lastName
+     */
     public function setLastName(string $lastName) {
-        $this->lastName = filter_var($lastName, FILTER_UNSAFE_RAW);
+        $this->lastName = filter_var($lastName, FILTER_SANITIZE_SPECIAL_CHARS);
     }
 
     public function getFullName(bool $lastNameFirst = false): string {
