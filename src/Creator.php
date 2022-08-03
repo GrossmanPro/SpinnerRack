@@ -56,6 +56,11 @@ class Creator {
         $this->lastName = filter_var($lastName, FILTER_SANITIZE_SPECIAL_CHARS);
     }
 
+    /**
+     * getFullName
+     * @param bool $lastNameFirst
+     * @return string
+     */
     public function getFullName(bool $lastNameFirst = false): string {
         if ($lastNameFirst) {
             return $this->lastName . ', ' . $this->firstName;
@@ -64,6 +69,12 @@ class Creator {
         }
     }
 
+   /**
+    * loadCreatorById
+    * @param object $pdo
+    * @param int $id
+    * @throws Exception
+    */
    public function loadCreatorById(object $pdo, int $id) {
         $sql = 'SELECT * FROM Creators WHERE Id = :id';
         $stmt = $pdo->prepare($sql);
@@ -81,6 +92,12 @@ class Creator {
         }
     }
 
+    /**
+     * saveCreator
+     * Handles edits and inserts to the Creators table
+     * @param object $pdo
+     * @return type
+     */
     public function saveCreator(object $pdo) {
         if ($this->id) {
             $sql = 'UPDATE Creators SET FirstName = :FirstName, LastName = :LastName WHERE Id = :ID';
@@ -96,7 +113,7 @@ class Creator {
     }
     
     /**
-     * Function getCreatorTable
+     * getCreatorTable
      * Static function to create a table of creator records for 
      * jQuery DataTable.  Placed here to keep methods related to
      * Creators table together.
@@ -128,7 +145,7 @@ class Creator {
     }
     
     /**
-     * Function deleteCreator
+     * deleteCreator
      * @param object $pdo
      * @param int $creatorId
      * @return void
