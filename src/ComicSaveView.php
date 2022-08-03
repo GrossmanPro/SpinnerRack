@@ -63,7 +63,7 @@ print drawHeader('Comic Saved');
             </tr>
         </tbody>
     </table>    
-    <a class="btn btn-primary" href="/comics/add">Add another comic?</a>
+    <a class="btn btn-primary" href="/admin/comics">Add another comic?</a>
 </div>
 <?php
 print drawFooter();
