@@ -31,22 +31,43 @@ class Comic {
         $this->artists = array();
     }
 
+    /**
+     * getID
+     * @return int
+     */
     public function getId(): int {
         return $this->id;
     }
 
+    /**
+     * getTitleId
+     * @return int
+     */
     public function getTitleId(): int {
         return $this->titleId;
     }
 
+    /**
+     * setTitleId
+     * @param int $titleId
+     */
     public function setTitleId(int $titleId) {
         $this->titleId = filter_var($titleId, FILTER_SANITIZE_NUMBER_INT);
     }
 
+    /**
+     * getYear
+     * @return int
+     */
     public function getYear(): int {
         return $this->year;
     }
 
+    /**
+     * setYear
+     * @param int $year
+     * @throws OutOfBoundsException
+     */
     public function setYear(int $year) {
         $saveYear = filter_var($year, FILTER_SANITIZE_NUMBER_INT);
         // comic industry probably won't exist in 2100--I know I won't
@@ -57,10 +78,19 @@ class Comic {
         }
     }
 
+    /**
+     * getMonth
+     * @return int
+     */
     public function getMonth(): int {
         return $this->month;
     }
 
+    /**
+     * setMonth
+     * @param int $month
+     * @throws OutOfBoundsException
+     */
     public function setMonth(int $month) {
         $saveMonth = filter_var($month, FILTER_SANITIZE_NUMBER_INT);
         if ($saveMonth >= 1 && $saveMonth <= 12) {
@@ -70,10 +100,19 @@ class Comic {
         }
     }
 
+    /**
+     * getIssue
+     * @return int
+     */
     public function getIssue(): int {
         return $this->issue;
     }
 
+    /**
+     * setIssue
+     * @param int $issue
+     * @throws OutOfBoundsException
+     */
     public function setIssue(int $issue) {
         $saveIssue = filter_var($issue, FILTER_SANITIZE_NUMBER_INT);
         if ($saveIssue >= 0) {
@@ -82,11 +121,20 @@ class Comic {
             throw new OutOfBoundsException("This is not a valid issue number");
         }
     }
-
+    
+    /**
+     * getStory
+     * @return string
+     */
     public function getStory(): string {
         return $this->story;
     }
 
+    /**
+     * setStory
+     * @param string $story
+     * @throws OutOfBoundsException
+     */
     public function setStory(string $story) {
         if (strlen($story) <= 1000) {
             $this->story = htmlspecialchars(strip_tags(trim($story)));
@@ -95,24 +143,45 @@ class Comic {
         }
     }
 
+    /**
+     * getNotes
+     * @return string
+     */
     public function getNotes(): string {
         return $this->notes;
     }
 
+    /**
+     * setNotes
+     * @param string $notes
+     */
     public function setNotes(string $notes) {
         $this->notes = htmlspecialchars(strip_tags(trim($notes)));
     }
 
+    /**
+     * getStars
+     * @return int
+     */
     public function getStars(): int {
         return $this->stars;
     }
     
+    /**
+     * getStarSvgs
+     * @return string
+     */
     public function getStarSvgs(): string {
         $filled = str_repeat('<i class="bi bi-star-fill"></i>', $this->getStars());
         $unfilled = str_repeat('<i class="bi bi-star"></i>', 5 - ($this->getStars()));
         return $filled . $unfilled;
     }
-
+    
+    /**
+     * setStars
+     * @param int $stars
+     * @throws OutOfBoundsException
+     */
     public function setStars(int $stars) {
         $saveStars = filter_var($stars, FILTER_SANITIZE_NUMBER_INT);
         if ($saveStars >= 0 && $saveStars <= 5) {
@@ -122,22 +191,44 @@ class Comic {
         }
     }
 
+    /**
+     * setHardCopy
+     * @param bool $hardCopy
+     */
     public function setHardCopy(bool $hardCopy) {
         $this->hardCopy = $hardCopy;
     }
 
+    /**
+     * getHardCopy
+     * @return bool
+     */
     public function getHardCopy(): bool {
         return $this->hardCopy;
     }
 
+    /**
+     * setWantList
+     * @param bool $wantList
+     */
     public function setWantList(bool $wantList) {
         $this->wantList = $wantList;
     }
 
+    /**
+     * getWantList
+     * @return bool
+     */
     public function getWantList(): bool {
         return $this->wantList;
     }
 
+    /**
+     * loadComicById
+     * @param object $pdo
+     * @param int $id
+     * @throws Exception
+     */
     public function loadComicById(object $pdo, int $id) {
         $sql = 'SELECT * FROM Comics WHERE Id = :Id';
         $stmt = $pdo->prepare($sql);
@@ -161,7 +252,13 @@ class Comic {
         }
     }
     
-    // may be called multiple times for books with more than one writer
+    /**
+     * setScripter
+     * May be called multiple times for books with > 1 writer
+     * @param object $pdo
+     * @param int $creatorId
+     * @throws Exception
+     */
     public function setScripter(object $pdo, int $creatorId) {
         if ($this->id) {
             $sql = 'INSERT INTO ScriptBy (ComicId, CreatorId) VALUES (:ComicId, :CreatorId)';
@@ -174,6 +271,12 @@ class Comic {
         }
     }
     
+    /**
+     * setArtist
+     * @param object $pdo
+     * @param int $creatorId
+     * @throws Exception
+     */
     public function setArtist(object $pdo, int $creatorId) {
         if ($this->id) {
             $sql = 'INSERT INTO ArtBy (ComicId, CreatorId) VALUES (:ComicId, :CreatorId)';
@@ -186,6 +289,11 @@ class Comic {
         }        
     }
     
+    /**
+     * loadScripters
+     * @param object $pdo
+     * @param int $comicId
+     */
     private function loadScripters(object $pdo, int $comicId) {
         $this->scripters = array();  // reset and reload
         $sql = 'SELECT CreatorId FROM ScriptBy WHERE ComicId = :ComicId';
@@ -200,7 +308,7 @@ class Comic {
     }
     
     /**
-     * function getScriptersToString
+     * getScriptersToString
      * Returns scripter names as comma-delimited string for screen display.
      * @return string
      */
@@ -213,7 +321,7 @@ class Comic {
     }
     
     /**
-     * function getArtistsToString
+     * getArtistsToString
      * Returns artist names as comma-delimited string for screen display.
      * @return string
      */
@@ -225,6 +333,11 @@ class Comic {
         return substr($list, 0, -2);
     }
     
+    /**
+     * loadArtists
+     * @param object $pdo
+     * @param int $comicId
+     */
     private function loadArtists(object $pdo, int $comicId) {
         $this->artists = array();  // reset
         $sql = 'SELECT CreatorId FROM ArtBy WHERE ComicId = :ComicId';
@@ -236,10 +349,14 @@ class Comic {
             $artBy->loadCreatorById($pdo, $artist['CreatorId']);
             $this->artists[] = $artBy;
         }
-    }
+    }    
     
-    
-    
+    /**
+     * saveComic
+     * Handles INSERTS and UPDATES To Comics table
+     * @param object $pdo
+     * @return type
+     */
     public function saveComic(object $pdo) {
         $params = array();
         $params[] = $this->titleId;
