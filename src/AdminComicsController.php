@@ -28,7 +28,7 @@ try {
         $comic = new Comic();
     }
         
-    $comic->setTitle($title);
+    $comic->setTitleId($title);
     $comic->setIssue($issue);
     $comic->setMonth($month);
     $comic->setStory($story);
