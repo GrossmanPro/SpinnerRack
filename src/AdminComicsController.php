@@ -31,6 +31,7 @@ try {
     $comic->setTitleId($title);
     $comic->setIssue($issue);
     $comic->setMonth($month);
+    $comic->setYear($year);
     $comic->setStory($story);
     $comic->setStars($stars);
     $comic->setNotes($notes);
