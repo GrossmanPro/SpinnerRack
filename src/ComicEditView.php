@@ -30,7 +30,7 @@ print drawHeader('Admin: Edit Comic');
                 <label for="title">&nbsp;&nbsp;Title</label>
             </div>
             <div class="form-floating col-md-2">
-                <input type="text" class="form-control" id="issue" name="issue" title="Issue number" required>
+                <input type="text" class="form-control" id="issue" name="issue" title="Issue number" value="<?php print $comic->getIssue(); ?>" required>
                 <label for="issue">&nbsp;&nbsp;Issue No</label>
             </div>  
             <div class="form-floating col-md-2">
