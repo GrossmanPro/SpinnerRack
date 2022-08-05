@@ -62,5 +62,5 @@ try {
     header('Location: /admin/comics/' . $action);   
     
 } catch (Exception $e) {
-    header('Location: GeneralError.php');
+    header('Location: /error');
 }
