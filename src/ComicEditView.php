@@ -22,6 +22,7 @@ print drawHeader('Admin: Edit Comic');
     <p class="h4">Edit Comic</p>
     <form id="comicInput" method="post" action="/admin/comics/save">
         <?php print $tokenTag; ?>
+        <input type="hidden" name="editId" value="<?php print $comicId; ?>">
         <div class="row mb-3">
             <div class="form-floating col-md-6">
                 <select class="form-select" id="title" name="title" title="Comic title" autofocus>
