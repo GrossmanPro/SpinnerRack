@@ -62,5 +62,7 @@ try {
     header('Location: /admin/comics/' . $action);   
     
 } catch (Exception $e) {
+    error_log($e->getMessage());
+    error_log($e->getTraceAsString());
     header('Location: /error');
 }
