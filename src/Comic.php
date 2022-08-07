@@ -464,4 +464,16 @@ class Comic {
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array($comicId));
     }
+    
+    /**
+     * deleteCreators
+     * @param object $pdo
+     * @param int $comicId
+     * @return void
+     */
+    public function deleteCreators(object $pdo, int $comicId): void {
+        $this->scripters = array();
+        $this->artists = array();
+        
+    }
 }

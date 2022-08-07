@@ -38,6 +38,9 @@ try {
     $comic->setWantList(array_key_exists('wantList', $_POST));
     $comic->setHardCopy(array_key_exists('hardCopy', $_POST));    
     $comic->saveComic($pdo);
+    
+    // TODO remove any existing creators
+    
 
     $scripters = array_unique(array_filter($_POST, function ($key) {
                 return stripos($key, 'scripter_') !== false;
