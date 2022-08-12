@@ -18,6 +18,7 @@ try {
         exit;
     } 
     
+    $pdo->beginTransaction();
     if (array_key_exists('editId', $_POST)) {
         $action = 'saved';
         $comicId = filter_input(INPUT_POST, 'editId', FILTER_SANITIZE_NUMBER_INT);
@@ -60,10 +61,15 @@ try {
         }
     }  
     
+    $pdo->commit();
     header('Location: /admin/comics/' . $action);   
     
-} catch (Exception $e) {
+} catch (Exception $e) {    
     error_log($e->getMessage());
     error_log($e->getTraceAsString());
     header('Location: /error');
+} catch (PDOException $p) {    
+    error_log($e->getMessage());
+    error_log($e->getTraceAsString());
+    header('Location: /error');    
 }
