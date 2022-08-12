@@ -472,8 +472,14 @@ class Comic {
      * @return void
      */
     public function deleteCreators(object $pdo, int $comicId): void {
+        // reset object arrays
         $this->scripters = array();
         $this->artists = array();
-        
+        $sql1 = 'DELETE FROM ScriptBy WHERE ComicId = ?';
+        $sql2 = 'DELETE FROM ArtBy WHERE ComicId = ?';
+        $stmt1 = $pdo->prepare($sql1);
+        $stmt2 = $pdo->prepare($sql2);
+        $stmt1->execute(array($comicId));
+        $stmt2->execute(array($comicId));
     }
 }
