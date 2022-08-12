@@ -468,10 +468,9 @@ class Comic {
     /**
      * deleteCreators
      * @param object $pdo
-     * @param int $comicId
      * @return void
      */
-    public function deleteCreators(object $pdo, int $comicId): void {
+    public function deleteCreators(object $pdo): void {
         // reset object arrays
         $this->scripters = array();
         $this->artists = array();
@@ -479,7 +478,7 @@ class Comic {
         $sql2 = 'DELETE FROM ArtBy WHERE ComicId = ?';
         $stmt1 = $pdo->prepare($sql1);
         $stmt2 = $pdo->prepare($sql2);
-        $stmt1->execute(array($comicId));
-        $stmt2->execute(array($comicId));
+        $stmt1->execute(array($this->getId()));
+        $stmt2->execute(array($this->getId()));
     }
 }
