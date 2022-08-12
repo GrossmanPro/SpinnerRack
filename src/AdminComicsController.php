@@ -23,6 +23,7 @@ try {
         $comicId = filter_input(INPUT_POST, 'editId', FILTER_SANITIZE_NUMBER_INT);
         $comic = new Comic();
         $comic->loadComicById($pdo, $comicId);
+        $comic->deleteCreators($pdo);
     } else {
         $action = 'added';
         $comic = new Comic();
@@ -38,9 +39,6 @@ try {
     $comic->setWantList(array_key_exists('wantList', $_POST));
     $comic->setHardCopy(array_key_exists('hardCopy', $_POST));    
     $comic->saveComic($pdo);
-    
-    // TODO remove any existing creators
-    
 
     $scripters = array_unique(array_filter($_POST, function ($key) {
                 return stripos($key, 'scripter_') !== false;
