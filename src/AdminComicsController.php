@@ -65,10 +65,16 @@ try {
     header('Location: /admin/comics/' . $action);   
     
 } catch (Exception $e) {    
+    if ($pdo->inTransaction()) {
+        $pdo->rollBack();
+    }
     error_log($e->getMessage());
     error_log($e->getTraceAsString());
     header('Location: /error');
-} catch (PDOException $p) {    
+} catch (PDOException $p) {   
+    if ($pdo->inTransaction()) {
+        $pdo->rollBack();
+    }  
     error_log($e->getMessage());
     error_log($e->getTraceAsString());
     header('Location: /error');    
