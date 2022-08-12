@@ -18,14 +18,28 @@ class Publisher {
         return $this->id;
     }
     
+    /**
+     * getPublisherName
+     * @return string
+     */
     public function getPublisherName(): string {
         return $this->publisherName;
     }
     
+    /**
+     * setPublisherName
+     * @param string $name
+     */
     public function setPublisherName(string $name) {
         $this->publisherName = filter_var($name, FILTER_UNSAFE_RAW);
     }
     
+    /**
+     * loadPublisherById
+     * @param object $pdo
+     * @param int $id
+     * @throws Exception
+     */
     public function loadPublisherById(object $pdo, int $id) {
         $sql = 'SELECT * FROM Publishers WHERE Id = :Id';
         $stmt = $pdo->prepare($sql);
@@ -41,6 +55,11 @@ class Publisher {
         }        
     }
     
+    /**
+     * savePublisher
+     * @param object $pdo
+     * @return int
+     */
     public function savePublisher(object $pdo): int {
         if ($this->id) {
             $sql = 'UPDATE Publishers SET Publisher = :Publisher WHERE Id = :Id';
@@ -55,6 +74,11 @@ class Publisher {
         return $this->id;  
     }
     
+    /**
+     * getPublisherTable
+     * @param object $pdo
+     * @return string
+     */
     public static function getPublisherTable(object $pdo): string {
         $table = '<table id="adminPublishersTable" class="table table-sm table-bordered">';
         $table .= '<thead>';
@@ -77,6 +101,12 @@ class Publisher {
         return $table;
     }
     
+    /**
+     * deletePublisher
+     * @param object $pdo
+     * @param int $publisherId
+     * @return void
+     */
     public static function deletePublisher(object $pdo, int $publisherId): void {
         $sql = 'DELETE FROM Publishers WHERE Id = :Id';
         $stmt = $pdo->prepare($sql);
