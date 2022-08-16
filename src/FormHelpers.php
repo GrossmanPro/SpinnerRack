@@ -110,7 +110,7 @@ function drawHeader(string $title, array $cssFiles = null): string {
     $header .= '</ul>';
     $header .= '</li>';
        
-    $header .= '<form class="d-flex" role="search">';       
+    $header .= '<form class="d-flex" role="search" method="post" action="/search/results">';       
     $header .= '<input class="form-control me-2" type="search" placeholder="Find comics" aria-label="Search">';       
     $header .= '<button class="btn btn-outline-success" type="submit">Search</button>';       
     $header .= '</form>';    
