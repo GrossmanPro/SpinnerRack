@@ -84,7 +84,7 @@ function drawHeader(string $title, array $cssFiles = null): string {
     $header .= '</head>';
     $header .= '<body>';   
     $header .= '<nav class="navbar bg-light">';
-    $header .= '<div class="container">';
+    $header .= '<div class="container-fluid">';
     $header .= '<a class="navbar-brand" href="index.php">';
     $header .= '<img src="/img/brand-01.svg" alt="Grossman Project-SpinnerRack" width="60" height="60">';
     $header .= '</a>';
@@ -110,7 +110,10 @@ function drawHeader(string $title, array $cssFiles = null): string {
     $header .= '</ul>';
     $header .= '</li>';
        
-    
+    $header .= '<form class="d-flex" role="search">';       
+    $header .= '<input class="form-control me-2" type="search" placeholder="Find comics" aria-label="Search">';       
+    $header .= '<button class="btn btn-outline-success" type="submit">Search</button>';       
+    $header .= '</form>';    
     $header .= '</div>';
     $header .= '</nav>';    
     return $header;
