@@ -433,7 +433,7 @@ class Comic {
         $table .= '</tr>';
         $table .= '</thead>';
         $table .= '<tbody>';
-        foreach ($pdo->query('SELECT * FROM vwComicInfo ORDER BY [Name], Year, Issue ASC') as $comic) {
+        foreach ($pdo->query('SELECT * FROM ComicSearchView ORDER BY [Name], Year, Issue ASC') as $comic) {
             $editBtn = '<a href="/admin/comics/edit/' . $comic['Id'] . '/" class="btn btn-sm btn-info" id="btnEdit_' . $comic['Id'] . '">Edit</a>';
             $deleteBtn = '<input type="button" class="btn btn-sm btn-danger deleteComic" id="btnDelete_' . $comic['Id'] . '" value="Delete">';
             $table .= '<tr>';
@@ -443,8 +443,10 @@ class Comic {
             $table .= '<td class="text-center">' . $comic['Year']. '</td>';
             $table .= '<td class="text-ceneter">' . $comic['Volume'] . '</td>';
             $table .= '<td>' . $comic['Publisher'] . '</td>';
-            $table .= '<td class="text-center">' . $comic['WantListYN'] . '</td>';
-            $table .= '<td class="text-center">' . $comic['FormatType'] . '</td>';
+            $wlyn = ($comic['WantList']) ? 'Y' : 'N';
+            $formatType = ($comic['HardCopy']) ? 'PHYSICAL' : 'DIGITAL';
+            $table .= '<td class="text-center">' . $wlyn . '</td>';
+            $table .= '<td class="text-center">' . $formatType . '</td>';
             $table .= '</tr>';
         }
         $table .= '</tbody>';
