@@ -44,6 +44,9 @@
                 <file>../CreatorEditView.php</file>
                 <file>../ComicEditView.php</file>
                 <file>../Setup.php</file>
+                <file>../ComicSearchResults.php</file>
+                <file>../DbConfig.php</file>
+                <file>../DbConn.php</file>
         </exclude>
     </coverage>
 </phpunit>
