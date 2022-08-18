@@ -85,12 +85,12 @@ function drawHeader(string $title, array $cssFiles = null): string {
     $header .= '<body>';   
     $header .= '<nav class="navbar bg-light">';
     $header .= '<div class="container-fluid">';
-    $header .= '<a class="navbar-brand" href="home">';
+    $header .= '<a class="navbar-brand" href="/home">';
     $header .= '<img src="/img/brand-01.svg" alt="Grossman Project-SpinnerRack" width="60" height="60">';
     $header .= '</a>';
     
     $header .= '<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">';
-    $header .= '<li><a href="index.php" class="nav-link px-2 link-secondary">Home</a></li>';
+    $header .= '<li><a href="/home" class="nav-link px-2 link-secondary">Home</a></li>';
     $header .= '<li class="nav-item dropdown">';
     $header .= '<a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>';
     $header .= '<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">';
