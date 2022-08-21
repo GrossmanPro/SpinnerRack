@@ -190,5 +190,32 @@ class TitleTest extends TestCase {
         $rowNum = (int)$stmt->fetchColumn();
         $this->assertEquals(0, $rowNum);     
     }    
+    
+        /**
+     * @covers \Title::__construct
+     * @covers \Title::setName
+     * @covers \Title::setPublisherId
+     * @covers \Title::setStartYear
+     * @covers \Title::setVolume
+     * @covers \Title::saveTitle
+     * @covers \Title::deleteTitle
+     * @covers \Title::getTitlesTable
+     */
+    public function testTitleTable() {
+        global $pdo;
+        $title = new Title();
+        $title->setName("DELETE TEST 3");
+        $title->setPublisherId(44);  
+        $title->setStartYear(2022);
+        $title->setVolume(1);
+        $id = $title->saveTitle($pdo);
+
+        // spot check table output
+        $table = Title::getTitlesTable($pdo);
+        $this->assertStringContainsString("<table id=\"adminTitlesTable\"", $table);
+        $this->assertStringContainsString("</table>", $table);  
+        Title::deleteTitle($pdo, $id);
+    }    
+    
 }
 
