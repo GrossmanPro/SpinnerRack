@@ -163,5 +163,32 @@ class TitleTest extends TestCase {
     }
     
     
+    
+    /**
+     * @covers \Title::__construct
+     * @covers \Title::setName
+     * @covers \Title::setPublisherId
+     * @covers \Title::setStartYear
+     * @covers \Title::setVolume
+     * @covers \Title::saveTitle
+     * @covers \Title::deleteTitle
+     */
+    public function testDeleteTitle() {
+        global $pdo;
+        $title = new Title();
+        $title->setName("DELETE TEST 2");
+        $title->setPublisherId(44);  // Marvel
+        $title->setStartYear(2022);
+        $title->setVolume(1);
+        $id = $title->saveTitle($pdo);
+        
+        Title::deleteTitle($pdo, $id);
+        
+        $sql = 'SELECT COUNT(*) AS RowNum FROM Titles WHERE Id = ?';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array($id));
+        $rowNum = (int)$stmt->fetchColumn();
+        $this->assertEquals(0, $rowNum);     
+    }    
 }
 
