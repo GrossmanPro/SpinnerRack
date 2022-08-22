@@ -154,6 +154,26 @@ class CreatorTest extends TestCase {
         $sql2 = 'DELETE FROM Creators WHERE Id = :Id';
         $stmt = $pdo->prepare($sql2);
         $stmt->execute(array($id));
-    }
+    }   
     
+    /**
+     * @covers \Creator::saveCreator
+     * @covers \Creator::setLastName
+     * @covers \Creator::setFirstName
+     * @covers \Creator::deleteCreator
+     * @covers \Creator::__construct
+     */
+    public function testDeleteCreator() {
+        global $pdo;
+        $creator = new Creator();
+        $creator->setFirstName("Bobert");
+        $creator->setLastName("Blarghingham");
+        $id = $creator->saveCreator($pdo);
+        
+        Creator::deleteCreator($pdo, $id);
+        
+        $sql = "SELECT COUNT(*) AS NumRows FROM Creators WHERE LastName='Blarghingham' OR ID = " . $id;
+        $rowNum = (int)$pdo->query($sql)->fetchColumn();
+        $this->assertEquals(0, $rowNum);     
+    }
 }
