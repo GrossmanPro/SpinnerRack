@@ -176,4 +176,15 @@ class CreatorTest extends TestCase {
         $rowNum = (int)$pdo->query($sql)->fetchColumn();
         $this->assertEquals(0, $rowNum);     
     }
+    
+    /**
+     * @covers \Creator::getCreatorTable
+     * 
+     */
+    public function testCreatorTable() {
+        global $pdo;
+        $table = Creator::getCreatorTable($pdo);
+        $this->assertStringContainsString("<table id=\"adminCreatorsTable\"", $table);
+        $this->assertStringContainsString("</table>", $table);  
+    }
 }
