@@ -25,7 +25,7 @@ print drawHeader('Results');
 ?>
 <div class="container p-4">    
     <p class="h4">Results</p>
-    <table class="table table-sm table-bordered">
+    <table id="searchResults" class="table table-sm table-bordered">
         <thead>
         <th>&nbsp;</th>
         <th>Title</th>
@@ -54,4 +54,4 @@ print drawHeader('Results');
     </table>
 </div>
 <?php
-print drawFooter();
+print drawFooter(array('ComicSearchResults-01.js'));
